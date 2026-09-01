@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>스캔 리포트 목록</title>
+<style>
+:root{--bg:#f7f7f8;--panel:#fff;--text:#1a1a1a;--muted:#6b7280;--border:#e5e7eb;
+--accent:#2563eb;--good:#16a34a;--good-bg:#dcfce7;--fair:#ca8a04;--fair-bg:#fef9c3;
+--poor:#dc2626;--poor-bg:#fee2e2;--chip-bg:#eef2ff;--chip-text:#3730a3;}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1115;--panel:#181b21;--text:#e8e8ea;
+--muted:#9aa1ac;--border:#2a2e37;--accent:#60a5fa;--good:#4ade80;--good-bg:#052e16;
+--fair:#facc15;--fair-bg:#3f2d03;--poor:#f87171;--poor-bg:#450a0a;
+--chip-bg:#1e2547;--chip-text:#c7d2fe;}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
+line-height:1.5;}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+header.page-head{padding:20px 16px 8px}
+header.page-head h1{margin:0 0 4px;font-size:1.4rem}
+.subtitle{color:var(--muted);font-size:.9rem}
+.jump{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.jump a{background:var(--panel);border:1px solid var(--border);border-radius:8px;
+padding:6px 12px;color:var(--text);text-decoration:none;font-size:.85rem}
+/* 전략 탭 — 선택된 것만 강조해 "지금 무엇을 보고 있는지"가 항상 드러나게 한다 */
+button.tab{background:var(--panel);border:1px solid var(--border);border-radius:8px;
+padding:6px 12px;color:var(--text);font-size:.85rem;font-family:inherit;cursor:pointer}
+button.tab.is-active{background:var(--accent);border-color:var(--accent);color:#fff;
+font-weight:600}
+/* 숨김은 JS가 붙었을 때만 — 스크립트가 막히면 예전처럼 전부 보인다 */
+.js-tabs section.scanner-section{display:none}
+.js-tabs section.scanner-section.is-shown{display:block}
+@media print{.js-tabs section.scanner-section{display:block}}
+section.scanner-section{margin:24px 0}
+section.scanner-section h2{font-size:1.1rem;display:flex;align-items:baseline;gap:8px;
+flex-wrap:wrap;border-bottom:2px solid var(--border);padding-bottom:8px}
+.count{font-size:.8rem;color:var(--muted);font-weight:normal}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:12px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px}
+.card-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.card-head h3{margin:0;font-size:1.05rem}
+.ticker{color:var(--muted);font-weight:normal;font-size:.85rem}
+.ticker-sm{color:var(--muted);font-size:.8rem}
+.industry-cell{color:var(--muted);font-size:.78rem}
+.market{font-size:.75rem;color:var(--muted);border:1px solid var(--border);
+border-radius:6px;padding:1px 6px;white-space:nowrap}
+.capture{font-size:.72rem;font-weight:600;border-radius:6px;padding:1px 6px;white-space:nowrap}
+.capture.new{background:#fdecea;color:#c0392b}
+.capture.returning{background:#eef2f7;color:#5a6b82}
+.industry{font-size:.8rem;color:var(--muted);margin-top:2px}
+.industry-stat{font-size:.75rem;color:var(--muted);margin-top:2px}
+.sector-info{font-size:.75rem;color:var(--muted);margin-top:6px;padding:8px 10px;
+background:var(--bg);border-radius:8px;border:1px dashed var(--border)}
+.sector-caveat{display:block;margin-top:4px;font-style:italic;opacity:.85}
+.stats{margin-top:8px;font-size:.9rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{background:var(--chip-bg);color:var(--chip-text);border-radius:6px;
+padding:3px 8px;font-size:.78rem}
+.plan{margin-top:10px;background:var(--bg);border-radius:8px;padding:8px 10px;
+font-size:.85rem;border:1px dashed var(--border)}
+img.chart{width:100%;border-radius:8px;margin-top:10px;display:block}
+/* 카드에서는 폭에 맞춰 줄어 보이지만 원본은 그 2배 해상도라, 클릭해 새 탭에서
+   열면 봉 하나하나를 확인할 수 있다(돌파 시점 확인용). */
+a.chart-link{display:block;cursor:zoom-in}
+.pattern-label{font-size:.75rem;color:var(--muted);margin-top:4px;font-style:italic}
+.factors{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.factor-row{display:flex;gap:8px;align-items:flex-start}
+.badge{flex:0 0 auto;width:22px;height:22px;border-radius:6px;display:flex;
+align-items:center;justify-content:center;font-size:.72rem;font-weight:700}
+.badge.good{background:var(--good-bg);color:var(--good)}
+.badge.fair{background:var(--fair-bg);color:var(--fair)}
+.badge.poor{background:var(--poor-bg);color:var(--poor)}
+.badge.muted{background:var(--border);color:var(--muted)}
+.factor-body{flex:1;min-width:0}
+.factor-head{font-size:.85rem;display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}
+.verdict{font-size:.72rem;padding:1px 6px;border-radius:5px}
+.verdict.good{background:var(--good-bg);color:var(--good)}
+.verdict.fair{background:var(--fair-bg);color:var(--fair)}
+.verdict.poor{background:var(--poor-bg);color:var(--poor)}
+.verdict.muted{background:var(--border);color:var(--muted)}
+.fval{font-size:.82rem;color:var(--muted);margin-top:1px}
+.fnote{font-size:.75rem;color:var(--muted);font-style:italic;margin-top:1px}
+.links{margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.links a{color:var(--accent);text-decoration:none;font-size:.82rem}
+/* 폰에서 탭하는 주 동작이라 다른 참고용 링크와 구분되게 버튼처럼 그린다 */
+.links a.watchlist-link{margin-left:auto;padding:4px 10px;border-radius:6px;
+background:var(--chip-bg);color:var(--chip-text);font-weight:600}
+/* 종목분석: 관심종목 버튼과 같은 버튼 톤이되 색을 달리해 동작이 다름을 드러낸다.
+   앱이 안 열리는 환경을 위해 바로 옆에 작은 웹 링크를 붙인다. */
+.links a.analysis-link{padding:4px 10px;border-radius:6px;border:1px solid var(--border);
+color:var(--accent);font-weight:600}
+.links a.analysis-web{font-size:.75rem;color:var(--muted);text-decoration:underline;
+margin-left:-4px}
+.muted-text{color:var(--muted);font-size:.9rem}
+.error{color:var(--poor)}
+details.full-results{margin-top:16px}
+details.full-results summary{cursor:pointer;color:var(--accent);font-size:.9rem;
+padding:6px 0}
+.csv-link{margin-left:10px;font-size:.8rem;color:var(--muted);text-decoration:underline}
+.table-wrap{overflow-x:auto;margin-top:8px}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th,td{padding:6px 8px;text-align:left;border-bottom:1px solid var(--border);
+white-space:nowrap}
+th{color:var(--muted);font-weight:600}
+tr.is-new{font-weight:700}
+tr.is-new td:first-child{border-left:3px solid var(--accent);padding-left:6px}
+.legend{font-size:.75rem;color:var(--muted);margin-top:4px}
+.disclaimer{margin:32px 0 16px;background:var(--panel);border:1px solid var(--border);
+border-radius:10px;padding:14px 16px;font-size:.85rem;color:var(--muted)}
+.disclaimer b{color:var(--text)}
+footer{color:var(--muted);font-size:.78rem;text-align:center;padding:16px 0 32px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="page-head"><h1>스캔 리포트 목록</h1></header>
+  <ul style="list-style:none;padding:0"><li><a href="2026-09-01.html">2026-09-01</a></li><li><a href="2026-08-31.html">2026-08-31</a></li><li><a href="2026-08-28.html">2026-08-28</a></li><li><a href="2026-08-27.html">2026-08-27</a></li></ul>
+</div>
+</body>
+</html>

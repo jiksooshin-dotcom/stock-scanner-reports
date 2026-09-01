@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>2026-08-21 스캔 리포트</title>
+<style>
+:root{--bg:#f7f7f8;--panel:#fff;--text:#1a1a1a;--muted:#6b7280;--border:#e5e7eb;
+--accent:#2563eb;--good:#16a34a;--good-bg:#dcfce7;--fair:#ca8a04;--fair-bg:#fef9c3;
+--poor:#dc2626;--poor-bg:#fee2e2;--chip-bg:#eef2ff;--chip-text:#3730a3;}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1115;--panel:#181b21;--text:#e8e8ea;
+--muted:#9aa1ac;--border:#2a2e37;--accent:#60a5fa;--good:#4ade80;--good-bg:#052e16;
+--fair:#facc15;--fair-bg:#3f2d03;--poor:#f87171;--poor-bg:#450a0a;
+--chip-bg:#1e2547;--chip-text:#c7d2fe;}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
+line-height:1.5;}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+header.page-head{padding:20px 16px 8px}
+header.page-head h1{margin:0 0 4px;font-size:1.4rem}
+.subtitle{color:var(--muted);font-size:.9rem}
+.jump{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.jump a{background:var(--panel);border:1px solid var(--border);border-radius:8px;
+padding:6px 12px;color:var(--text);text-decoration:none;font-size:.85rem}
+section.scanner-section{margin:24px 0}
+section.scanner-section h2{font-size:1.1rem;display:flex;align-items:baseline;gap:8px;
+flex-wrap:wrap;border-bottom:2px solid var(--border);padding-bottom:8px}
+.count{font-size:.8rem;color:var(--muted);font-weight:normal}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:12px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px}
+.card-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.card-head h3{margin:0;font-size:1.05rem}
+.ticker{color:var(--muted);font-weight:normal;font-size:.85rem}
+.ticker-sm{color:var(--muted);font-size:.8rem}
+.market{font-size:.75rem;color:var(--muted);border:1px solid var(--border);
+border-radius:6px;padding:1px 6px;white-space:nowrap}
+.capture{font-size:.72rem;font-weight:600;border-radius:6px;padding:1px 6px;white-space:nowrap}
+.capture.new{background:#fdecea;color:#c0392b}
+.capture.returning{background:#eef2f7;color:#5a6b82}
+.industry{font-size:.8rem;color:var(--muted);margin-top:2px}
+.industry-stat{font-size:.75rem;color:var(--muted);margin-top:2px}
+.sector-info{font-size:.75rem;color:var(--muted);margin-top:6px;padding:8px 10px;
+background:var(--bg);border-radius:8px;border:1px dashed var(--border)}
+.sector-caveat{display:block;margin-top:4px;font-style:italic;opacity:.85}
+.stats{margin-top:8px;font-size:.9rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{background:var(--chip-bg);color:var(--chip-text);border-radius:6px;
+padding:3px 8px;font-size:.78rem}
+.plan{margin-top:10px;background:var(--bg);border-radius:8px;padding:8px 10px;
+font-size:.85rem;border:1px dashed var(--border)}
+img.chart{width:100%;border-radius:8px;margin-top:10px;display:block}
+.pattern-label{font-size:.75rem;color:var(--muted);margin-top:4px;font-style:italic}
+.factors{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.factor-row{display:flex;gap:8px;align-items:flex-start}
+.badge{flex:0 0 auto;width:22px;height:22px;border-radius:6px;display:flex;
+align-items:center;justify-content:center;font-size:.72rem;font-weight:700}
+.badge.good{background:var(--good-bg);color:var(--good)}
+.badge.fair{background:var(--fair-bg);color:var(--fair)}
+.badge.poor{background:var(--poor-bg);color:var(--poor)}
+.badge.muted{background:var(--border);color:var(--muted)}
+.factor-body{flex:1;min-width:0}
+.factor-head{font-size:.85rem;display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}
+.verdict{font-size:.72rem;padding:1px 6px;border-radius:5px}
+.verdict.good{background:var(--good-bg);color:var(--good)}
+.verdict.fair{background:var(--fair-bg);color:var(--fair)}
+.verdict.poor{background:var(--poor-bg);color:var(--poor)}
+.verdict.muted{background:var(--border);color:var(--muted)}
+.fval{font-size:.82rem;color:var(--muted);margin-top:1px}
+.fnote{font-size:.75rem;color:var(--muted);font-style:italic;margin-top:1px}
+.links{margin-top:10px;display:flex;gap:10px}
+.links a{color:var(--accent);text-decoration:none;font-size:.82rem}
+.muted-text{color:var(--muted);font-size:.9rem}
+.error{color:var(--poor)}
+details.full-results{margin-top:16px}
+details.full-results summary{cursor:pointer;color:var(--accent);font-size:.9rem;
+padding:6px 0}
+.csv-link{margin-left:10px;font-size:.8rem;color:var(--muted);text-decoration:underline}
+.table-wrap{overflow-x:auto;margin-top:8px}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th,td{padding:6px 8px;text-align:left;border-bottom:1px solid var(--border);
+white-space:nowrap}
+th{color:var(--muted);font-weight:600}
+tr.is-new{font-weight:700}
+tr.is-new td:first-child{border-left:3px solid var(--accent);padding-left:6px}
+.legend{font-size:.75rem;color:var(--muted);margin-top:4px}
+.disclaimer{margin:32px 0 16px;background:var(--panel);border:1px solid var(--border);
+border-radius:10px;padding:14px 16px;font-size:.85rem;color:var(--muted)}
+.disclaimer b{color:var(--text)}
+footer{color:var(--muted);font-size:.78rem;text-align:center;padding:16px 0 32px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="page-head">
+    <h1>2026-08-21 스캔 리포트</h1>
+    <div class="subtitle">주식 스크리너 · 매일 자동 생성</div>
+    <nav class="jump"><a href="#launchpad">Launch Pad 스캐너 (1)</a><a href="#newhigh">52주 신고가 돌파 (1)</a></nav>
+  </header>
+  <section class="scanner-section" id="launchpad">
+  <h2>Launch Pad 스캐너 <span class="count">신규 1건 · 전체 24종목</span></h2>
+  <div class="cards"><article class="card">
+  <header class="card-head">
+    <h3>펌텍코리아 <span class="ticker">(251970)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">KRX</span>
+  </header>
+  <div class="industry">플라스틱제품 제조업</div>
+  
+  
+  <div class="stats">종가 59,800 · 거래대금 78억</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 1.3x</span><span class="chip">정배열 후 +0.0%</span></div>
+  <div class="plan">손절 55,016 | 목표 74,152 | 수량 167주</div>
+  <img class="chart" src="assets/2026-08-21/251970.png" alt="펌텍코리아 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2026 반기보고서(누적) · 순이익 흑자전환(+nan억원→+182억원) · EPS 흑자전환(+nan원→+1,468원) · 매출 흑자전환(+nan억원→+1,168억원)</div><div class="fnote">DART 공시 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2025 사업보고서(연간) · 순이익 +5.3% · EPS +5.3% · 매출 +10.2%</div><div class="fnote">DART 공시 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge good">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict good">양호</span></div><div class="fval">20일 평균 대비 1.26배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge muted">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">해당 종목의 가격 이력이 부족해 RS 등급 산출 불가</div></div></div><div class="factor-row"><span class="badge good">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict good">양호</span></div><div class="fval">20일 순매수 +13.46% (거래대금 대비) · 최근절반 +9.98% vs 이전절반 +19.50% (약화) · 순매수 12일 · 누적 +152.2억원</div><div class="fnote">한국투자증권 공식 API(KIS) 기준 · 기관+외국인 합산, 기타법인 제외로 거래대금은 소폭 과소추정 · 임계값은 아직 실측 검증 전 잠정치 — 수급 이력이 쌓이면 다른 지표와 같은 방식으로 구분력을 측정해 조정 예정 · 최근 유입이 이전보다 약해져 한 단계 낮춤</div></div></div><div class="factor-row"><span class="badge muted">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict muted">판정불가</span></div><div class="fval">지수 데이터 조회 실패 또는 판정 불가</div><div class="fnote">실제 매매에는 미적용 — 표시 전용</div></div></div></div>
+  <div class="links">
+    <a href="https://kr.tradingview.com/chart/?symbol=KRX%3A251970" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.naver.com/item/main.naver?code=251970" target="_blank" rel="noopener">네이버 금융</a>
+  </div>
+</article></div>
+  <details class="full-results">
+    <summary>전체 24종목 결과 보기 <a href="assets/2026-08-21/launchpad.csv" class="csv-link" onclick="event.stopPropagation()">CSV 다운로드</a></summary>
+    <div class="table-wrap"><table><thead><tr><th>종목</th><th>종가</th><th>정배열</th><th>거래량비</th><th>정배열 후</th></tr></thead><tbody><tr><td>DN오토모티브 <span class="ticker-sm">(007340)</span></td><td>44,200</td><td>10일차</td><td>1.5x</td><td>-7.1%</td></tr><tr><td>KBI메탈 <span class="ticker-sm">(024840)</span></td><td>5,290</td><td>5일차</td><td>0.3x</td><td>-8.0%</td></tr><tr><td>KISCO홀딩스 <span class="ticker-sm">(001940)</span></td><td>27,150</td><td>4일차</td><td>2.4x</td><td>-2.0%</td></tr><tr><td>KPX홀딩스 <span class="ticker-sm">(092230)</span></td><td>94,200</td><td>4일차</td><td>1.4x</td><td>-4.1%</td></tr><tr><td>KT&amp;G <span class="ticker-sm">(033780)</span></td><td>172,300</td><td>10일차</td><td>0.5x</td><td>-8.7%</td></tr><tr><td>LG <span class="ticker-sm">(003550)</span></td><td>107,700</td><td>3일차</td><td>1.1x</td><td>-2.3%</td></tr><tr><td>LG생활건강 <span class="ticker-sm">(051900)</span></td><td>313,000</td><td>7일차</td><td>0.6x</td><td>-0.3%</td></tr><tr><td>LX하우시스 <span class="ticker-sm">(108670)</span></td><td>33,750</td><td>10일차</td><td>0.8x</td><td>-2.0%</td></tr><tr><td>NHN <span class="ticker-sm">(181710)</span></td><td>75,200</td><td>7일차</td><td>1.3x</td><td>+22.7%</td></tr><tr><td>금호타이어 <span class="ticker-sm">(073240)</span></td><td>7,250</td><td>5일차</td><td>0.4x</td><td>-10.9%</td></tr><tr><td>네오팜 <span class="ticker-sm">(092730)</span></td><td>22,550</td><td>8일차</td><td>0.6x</td><td>-11.4%</td></tr><tr><td>메가터치 <span class="ticker-sm">(446540)</span></td><td>6,820</td><td>7일차</td><td>1.6x</td><td>-15.3%</td></tr><tr><td>메리츠금융지주 <span class="ticker-sm">(138040)</span></td><td>115,400</td><td>4일차</td><td>0.6x</td><td>-1.5%</td></tr><tr><td>미스토홀딩스 <span class="ticker-sm">(081660)</span></td><td>41,750</td><td>7일차</td><td>0.6x</td><td>-2.7%</td></tr><tr><td>삼성E&amp;A <span class="ticker-sm">(028050)</span></td><td>45,150</td><td>4일차</td><td>0.7x</td><td>-5.7%</td></tr><tr><td>삼성에스디에스 <span class="ticker-sm">(018260)</span></td><td>228,000</td><td>6일차</td><td>0.6x</td><td>-3.8%</td></tr><tr><td>서흥 <span class="ticker-sm">(008490)</span></td><td>22,500</td><td>5일차</td><td>0.8x</td><td>-9.5%</td></tr><tr><td>슈프리마 <span class="ticker-sm">(236200)</span></td><td>56,100</td><td>3일차</td><td>0.4x</td><td>-3.1%</td></tr><tr><td>씨젠 <span class="ticker-sm">(096530)</span></td><td>30,500</td><td>4일차</td><td>0.6x</td><td>+0.7%</td></tr><tr><td>에이플러스에셋 <span class="ticker-sm">(244920)</span></td><td>13,030</td><td>3일차</td><td>0.7x</td><td>-1.8%</td></tr><tr><td>이수화학 <span class="ticker-sm">(005950)</span></td><td>11,880</td><td>9일차</td><td>1.2x</td><td>-20.1%</td></tr><tr><td>지엔씨에너지 <span class="ticker-sm">(119850)</span></td><td>48,250</td><td>3일차</td><td>0.4x</td><td>-12.1%</td></tr><tr><td>코스메카코리아 <span class="ticker-sm">(241710)</span></td><td>137,300</td><td>6일차</td><td>0.9x</td><td>+10.3%</td></tr><tr class="is-new"><td>펌텍코리아 <span class="ticker-sm">(251970)</span></td><td>59,800</td><td>1일차</td><td>1.3x</td><td>+0.0%</td></tr></tbody></table></div><p class="legend">■ 굵은 줄 = 오늘 카드로 표시된 종목(신규·재포착)</p>
+  </details>
+</section><section class="scanner-section" id="newhigh">
+  <h2>52주 신고가 돌파 <span class="count">신규 1건 · 전체 1종목</span></h2>
+  <div class="cards"><article class="card">
+  <header class="card-head">
+    <h3>코스맥스 <span class="ticker">(192820)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">KRX</span>
+  </header>
+  <div class="industry">기타 화학제품 제조업</div>
+  
+  
+  <div class="stats">종가 271,000 · 거래대금 537억</div>
+  <div class="chips"><span class="chip">고점대비 +0.4%</span><span class="chip">6개월 +29.7%</span><span class="chip">갱신 1회</span><span class="chip">거래량비 1.4x</span></div>
+  <div class="plan">손절 252,030 | 목표 327,910 | 수량 36주</div>
+  <img class="chart" src="assets/2026-08-21/192820.png" alt="코스맥스 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2026 반기보고서(누적) · 순이익 흑자전환(+nan억원→+500억원) · EPS 흑자전환(+nan원→+4,292원) · 매출 흑자전환(+nan억원→+7,949억원)</div><div class="fnote">DART 공시 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2025 사업보고서(연간) · 순이익 +48.2% · EPS +43.4% · 매출 +10.7%</div><div class="fnote">DART 공시 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict good">우수</span></div><div class="fval">고점대비 +0.4% · 최근 20일 중 1회 갱신 · 6개월 모멘텀 +29.7%</div></div></div><div class="factor-row"><span class="badge good">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict good">양호</span></div><div class="fval">20일 평균 대비 1.39배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge muted">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">해당 종목의 가격 이력이 부족해 RS 등급 산출 불가</div></div></div><div class="factor-row"><span class="badge good">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict good">양호</span></div><div class="fval">20일 순매수 +11.55% (거래대금 대비) · 최근절반 +11.22% vs 이전절반 +12.34% (약화) · 순매수 16일 · 누적 +777.0억원</div><div class="fnote">한국투자증권 공식 API(KIS) 기준 · 기관+외국인 합산, 기타법인 제외로 거래대금은 소폭 과소추정 · 임계값은 아직 실측 검증 전 잠정치 — 수급 이력이 쌓이면 다른 지표와 같은 방식으로 구분력을 측정해 조정 예정 · 최근 유입이 이전보다 약해져 한 단계 낮춤</div></div></div><div class="factor-row"><span class="badge muted">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict muted">판정불가</span></div><div class="fval">지수 데이터 조회 실패 또는 판정 불가</div><div class="fnote">실제 매매에는 미적용 — 표시 전용</div></div></div></div>
+  <div class="links">
+    <a href="https://kr.tradingview.com/chart/?symbol=KRX%3A192820" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.naver.com/item/main.naver?code=192820" target="_blank" rel="noopener">네이버 금융</a>
+  </div>
+</article></div>
+  <details class="full-results">
+    <summary>전체 1종목 결과 보기 <a href="assets/2026-08-21/newhigh.csv" class="csv-link" onclick="event.stopPropagation()">CSV 다운로드</a></summary>
+    <div class="table-wrap"><table><thead><tr><th>종목</th><th>종가</th><th>고점대비</th><th>6개월</th><th>갱신</th><th>거래량비</th></tr></thead><tbody><tr class="is-new"><td>코스맥스 <span class="ticker-sm">(192820)</span></td><td>271,000</td><td>+0.4%</td><td>+29.7%</td><td>1회</td><td>1.4x</td></tr></tbody></table></div><p class="legend">■ 굵은 줄 = 오늘 카드로 표시된 종목(신규·재포착)</p>
+  </details>
+</section>
+  
+<div class="disclaimer">
+  ⚠️ <b>후보를 좁히는 용도이지 매수 근거가 아닙니다.</b><br>
+  · 위 팩터 중 성공/실패를 구분하는 것은 아직 확인되지 않았습니다
+  (오닐의 +25% 성장 기준은 측정 12칸 중 9칸이 마이너스).<br>
+  · 이 신호로 5슬롯 백테스트 시 코스피가 연 3.3%였던 9년과 +159%였던 최근 2년
+  <b>양쪽 모두 절대 손실</b>이었습니다.<br>
+  · 거래대금은 승률 예측용이 아니라 체결 가능성 판단용입니다 — 오히려 거래대금이
+  큰 종목을 고르면 승률은 떨어집니다(실측 −2.6%p).<br>
+  · 검증 내역: 저장소의 <code>docs/FINDINGS.md</code>
+</div>
+
+  <footer>자동 생성 · <a href="index.html">지난 리포트 목록</a></footer>
+</div>
+</body>
+</html>

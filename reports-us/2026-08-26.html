@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>2026-08-26 스캔 리포트</title>
+<style>
+:root{--bg:#f7f7f8;--panel:#fff;--text:#1a1a1a;--muted:#6b7280;--border:#e5e7eb;
+--accent:#2563eb;--good:#16a34a;--good-bg:#dcfce7;--fair:#ca8a04;--fair-bg:#fef9c3;
+--poor:#dc2626;--poor-bg:#fee2e2;--chip-bg:#eef2ff;--chip-text:#3730a3;}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1115;--panel:#181b21;--text:#e8e8ea;
+--muted:#9aa1ac;--border:#2a2e37;--accent:#60a5fa;--good:#4ade80;--good-bg:#052e16;
+--fair:#facc15;--fair-bg:#3f2d03;--poor:#f87171;--poor-bg:#450a0a;
+--chip-bg:#1e2547;--chip-text:#c7d2fe;}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
+line-height:1.5;}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+header.page-head{padding:20px 16px 8px}
+header.page-head h1{margin:0 0 4px;font-size:1.4rem}
+.subtitle{color:var(--muted);font-size:.9rem}
+.jump{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.jump a{background:var(--panel);border:1px solid var(--border);border-radius:8px;
+padding:6px 12px;color:var(--text);text-decoration:none;font-size:.85rem}
+section.scanner-section{margin:24px 0}
+section.scanner-section h2{font-size:1.1rem;display:flex;align-items:baseline;gap:8px;
+flex-wrap:wrap;border-bottom:2px solid var(--border);padding-bottom:8px}
+.count{font-size:.8rem;color:var(--muted);font-weight:normal}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:12px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px}
+.card-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.card-head h3{margin:0;font-size:1.05rem}
+.ticker{color:var(--muted);font-weight:normal;font-size:.85rem}
+.ticker-sm{color:var(--muted);font-size:.8rem}
+.market{font-size:.75rem;color:var(--muted);border:1px solid var(--border);
+border-radius:6px;padding:1px 6px;white-space:nowrap}
+.capture{font-size:.72rem;font-weight:600;border-radius:6px;padding:1px 6px;white-space:nowrap}
+.capture.new{background:#fdecea;color:#c0392b}
+.capture.returning{background:#eef2f7;color:#5a6b82}
+.industry{font-size:.8rem;color:var(--muted);margin-top:2px}
+.industry-stat{font-size:.75rem;color:var(--muted);margin-top:2px}
+.sector-info{font-size:.75rem;color:var(--muted);margin-top:6px;padding:8px 10px;
+background:var(--bg);border-radius:8px;border:1px dashed var(--border)}
+.sector-caveat{display:block;margin-top:4px;font-style:italic;opacity:.85}
+.stats{margin-top:8px;font-size:.9rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{background:var(--chip-bg);color:var(--chip-text);border-radius:6px;
+padding:3px 8px;font-size:.78rem}
+.plan{margin-top:10px;background:var(--bg);border-radius:8px;padding:8px 10px;
+font-size:.85rem;border:1px dashed var(--border)}
+img.chart{width:100%;border-radius:8px;margin-top:10px;display:block}
+.pattern-label{font-size:.75rem;color:var(--muted);margin-top:4px;font-style:italic}
+.factors{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.factor-row{display:flex;gap:8px;align-items:flex-start}
+.badge{flex:0 0 auto;width:22px;height:22px;border-radius:6px;display:flex;
+align-items:center;justify-content:center;font-size:.72rem;font-weight:700}
+.badge.good{background:var(--good-bg);color:var(--good)}
+.badge.fair{background:var(--fair-bg);color:var(--fair)}
+.badge.poor{background:var(--poor-bg);color:var(--poor)}
+.badge.muted{background:var(--border);color:var(--muted)}
+.factor-body{flex:1;min-width:0}
+.factor-head{font-size:.85rem;display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}
+.verdict{font-size:.72rem;padding:1px 6px;border-radius:5px}
+.verdict.good{background:var(--good-bg);color:var(--good)}
+.verdict.fair{background:var(--fair-bg);color:var(--fair)}
+.verdict.poor{background:var(--poor-bg);color:var(--poor)}
+.verdict.muted{background:var(--border);color:var(--muted)}
+.fval{font-size:.82rem;color:var(--muted);margin-top:1px}
+.fnote{font-size:.75rem;color:var(--muted);font-style:italic;margin-top:1px}
+.links{margin-top:10px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.links a{color:var(--accent);text-decoration:none;font-size:.82rem}
+/* 폰에서 탭하는 주 동작이라 다른 참고용 링크와 구분되게 버튼처럼 그린다 */
+.links a.watchlist-link{margin-left:auto;padding:4px 10px;border-radius:6px;
+background:var(--chip-bg);color:var(--chip-text);font-weight:600}
+.muted-text{color:var(--muted);font-size:.9rem}
+.error{color:var(--poor)}
+details.full-results{margin-top:16px}
+details.full-results summary{cursor:pointer;color:var(--accent);font-size:.9rem;
+padding:6px 0}
+.csv-link{margin-left:10px;font-size:.8rem;color:var(--muted);text-decoration:underline}
+.table-wrap{overflow-x:auto;margin-top:8px}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th,td{padding:6px 8px;text-align:left;border-bottom:1px solid var(--border);
+white-space:nowrap}
+th{color:var(--muted);font-weight:600}
+tr.is-new{font-weight:700}
+tr.is-new td:first-child{border-left:3px solid var(--accent);padding-left:6px}
+.legend{font-size:.75rem;color:var(--muted);margin-top:4px}
+.disclaimer{margin:32px 0 16px;background:var(--panel);border:1px solid var(--border);
+border-radius:10px;padding:14px 16px;font-size:.85rem;color:var(--muted)}
+.disclaimer b{color:var(--text)}
+footer{color:var(--muted);font-size:.78rem;text-align:center;padding:16px 0 32px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="page-head">
+    <h1>2026-08-26 스캔 리포트</h1>
+    <div class="subtitle">주식 스크리너 · 매일 자동 생성</div>
+    <nav class="jump"><a href="#launchpad">Launch Pad 스캐너 (22)</a><a href="#newhigh">52주 신고가 돌파 (3)</a></nav>
+  </header>
+  <section class="scanner-section" id="launchpad">
+  <h2>Launch Pad 스캐너 <span class="count">신규 22건 · 전체 50종목</span></h2>
+  <div class="cards"><article class="card">
+  <header class="card-head">
+    <h3>BorgWarner <span class="ticker">(BWA)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Consumer Discretionary</div>
+  <div class="industry-stat">업종 참고: RS 평균 56/99(업종 중 상위 12%) · 오늘 신호 5건 · 나스닥종합 대비 -13.9%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Industrials (nVent Electric plc·WESCO International 등 19종목)<br>섹터 내 RS 순위: 4/19위 (RS 79/99)<br>섹터 1~3위: nVent Electric plc(88), WESCO International(81), EnerSys(80)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $65.10</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 0.8x</span><span class="chip">정배열 후 +0.0%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/BWA.png" alt="BorgWarner 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2026 분기(10-Q) · 순이익 +23.7% · EPS +30.1% · 매출 +0.3%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge poor">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict poor">미흡</span></div><div class="fval">2025 연간(10-K) · 순이익 -18.0% · EPS -14.7% · 매출 +1.6%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.80배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge good">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict good">양호</span></div><div class="fval">RS 등급 79/99 (유니버스 1950종목 중 백분위) · 지수대비 +0.6%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3ABWA" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/BWA" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20BWA&body=ticker%3A%20BWA%0Aname%3A%20BorgWarner%0Amarket%3A%20NASDAQ%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>CNH Industrial <span class="ticker">(CNH)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Industrials</div>
+  <div class="industry-stat">업종 참고: RS 평균 55/99(업종 중 상위 18%) · 오늘 신호 10건 · 나스닥종합 대비 -17.1%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Industrials (Wabtec·파카 등 8종목)<br>섹터 내 RS 순위: 5/8위 (RS 50/99)<br>섹터 1~3위: Wabtec(77), 파카(66), Allison Transmission(62)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $11.56</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 1.0x</span><span class="chip">정배열 후 +0.0%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/CNH.png" alt="CNH Industrial 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge poor">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict poor">미흡</span></div><div class="fval">2026 분기(10-Q) · 순이익 -35.2% · EPS -35.3% · 매출 +2.0%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge poor">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict poor">미흡</span></div><div class="fval">2025 연간(10-K) · 순이익 -59.1% · EPS -58.6% · 매출 -8.8%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.99배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge fair">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict fair">보통</span></div><div class="fval">RS 등급 50/99 (유니버스 1950종목 중 백분위) · 지수대비 -20.7%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3ACNH" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/CNH" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20CNH&body=ticker%3A%20CNH%0Aname%3A%20CNH%20Industrial%0Amarket%3A%20NASDAQ%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>Cencora <span class="ticker">(COR)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Health Care</div>
+  <div class="industry-stat">업종 참고: RS 평균 71/99(업종 중 상위 2%) · 오늘 신호 11건 · 나스닥종합 대비 +3.0%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Health Care (Verisign·비자 등 28종목)<br>섹터 내 RS 순위: 21/28위 (RS 41/99)<br>섹터 1~3위: Verisign(87), 비자(82), Labcorp(81)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $328.06</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 0.8x</span><span class="chip">정배열 후 +0.0%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/COR.png" alt="Cencora 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2026 분기(10-Q) · 순이익 +11.1% · EPS +11.9% · 매출 +5.1%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2025 연간(10-K) · 순이익 +3.0% · EPS +5.7% · 매출 +9.3%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.75배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge fair">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict fair">보통</span></div><div class="fval">RS 등급 41/99 (유니버스 1950종목 중 백분위) · 지수대비 -27.0%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3ACOR" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/COR" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20COR&body=ticker%3A%20COR%0Aname%3A%20Cencora%0Amarket%3A%20NASDAQ%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>EXL Service <span class="ticker">(EXLS)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Industrials</div>
+  <div class="industry-stat">업종 참고: RS 평균 55/99(업종 중 상위 18%) · 오늘 신호 10건 · 나스닥종합 대비 -17.1%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Information Technology (H&amp;R Block·Duolingo 등 30종목)<br>섹터 내 RS 순위: 9/30위 (RS 83/99)<br>섹터 1~3위: H&amp;R Block(96), Duolingo(92), Paylocity(92)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $37.45</div>
+  <div class="chips"><span class="chip">정배열 2일차</span><span class="chip">거래량비 0.6x</span><span class="chip">정배열 후 -0.6%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/EXLS.png" alt="EXL Service 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2026 분기(10-Q) · 순이익 +0.8% · EPS +7.5% · 매출 +13.8%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2025 연간(10-K) · 순이익 +26.6% · EPS +27.3% · 매출 +13.6%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.58배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge good">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict good">우수</span></div><div class="fval">RS 등급 83/99 (유니버스 1950종목 중 백분위) · 지수대비 +5.2%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3AEXLS" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/EXLS" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20EXLS&body=ticker%3A%20EXLS%0Aname%3A%20EXL%20Service%0Amarket%3A%20NASDAQ%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>IES Holdings <span class="ticker">(IESC)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Industrials</div>
+  <div class="industry-stat">업종 참고: RS 평균 55/99(업종 중 상위 18%) · 오늘 신호 10건 · 나스닥종합 대비 -17.1%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Industrials (nVent Electric plc·WESCO International 등 19종목)<br>섹터 내 RS 순위: 19/19위 (RS 15/99)<br>섹터 1~3위: nVent Electric plc(88), WESCO International(81), EnerSys(80)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $313.23</div>
+  <div class="chips"><span class="chip">정배열 7일차</span><span class="chip">거래량비 1.5x</span><span class="chip">정배열 후 -58.6%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/IESC.png" alt="IES Holdings 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2026 분기(10-Q) · 순이익 +93.7% · EPS +98.7% · 매출 +39.6%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2024 연간(10-K) · 순이익 +39.6% · EPS +51.9% · 매출 +16.9%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge good">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict good">양호</span></div><div class="fval">20일 평균 대비 1.46배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge poor">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict poor">미흡</span></div><div class="fval">RS 등급 15/99 (유니버스 1950종목 중 백분위) · 지수대비 -49.0%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3AIESC" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/IESC" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20IESC&body=ticker%3A%20IESC%0Aname%3A%20IES%20Holdings%0Amarket%3A%20NASDAQ%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>ITT Inc. <span class="ticker">(ITT)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Industrials</div>
+  <div class="industry-stat">업종 참고: RS 평균 55/99(업종 중 상위 18%) · 오늘 신호 10건 · 나스닥종합 대비 -17.1%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Industrials (Applied Industrial Technologies·Watts Water Technologies 등 11종목)<br>섹터 내 RS 순위: 4/11위 (RS 69/99)<br>섹터 1~3위: Applied Industrial Technologies(83), Watts Water Technologies(79), Mueller Industries(70)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $205.98</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 0.7x</span><span class="chip">정배열 후 +0.0%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/ITT.png" alt="ITT Inc. 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge poor">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict poor">미흡</span></div><div class="fval">2026 분기(10-Q) · 순이익 -29.8% · EPS -37.5% · 매출 +51.5%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge poor">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict poor">미흡</span></div><div class="fval">2025 연간(10-K) · 순이익 -5.8% · EPS -3.0% · 매출 +8.5%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.68배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge fair">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict fair">보통</span></div><div class="fval">RS 등급 69/99 (유니버스 1950종목 중 백분위) · 지수대비 -9.2%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3AITT" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/ITT" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20ITT&body=ticker%3A%20ITT%0Aname%3A%20ITT%20Inc.%0Amarket%3A%20NASDAQ%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>KBR, Inc. <span class="ticker">(KBR)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Industrials</div>
+  <div class="industry-stat">업종 참고: RS 평균 55/99(업종 중 상위 18%) · 오늘 신호 10건 · 나스닥종합 대비 -17.1%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Industrials (Science Applications Intl Corp·Jacobs Solutions 등 15종목)<br>섹터 내 RS 순위: 7/15위 (RS 45/99)<br>섹터 1~3위: Science Applications Intl Corp(91), Jacobs Solutions(72), General Dynamics(67)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $37.69</div>
+  <div class="chips"><span class="chip">정배열 2일차</span><span class="chip">거래량비 0.6x</span><span class="chip">정배열 후 +0.0%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/KBR.png" alt="KBR, Inc. 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2026 분기(10-Q) · 순이익 +31.5% · EPS +33.9% · 매출 +1.6%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2025 연간(10-K) · 순이익 +10.7% · EPS +15.1% · 매출 +0.6%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.62배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge fair">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict fair">보통</span></div><div class="fval">RS 등급 45/99 (유니버스 1950종목 중 백분위) · 지수대비 -23.7%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3AKBR" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/KBR" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20KBR&body=ticker%3A%20KBR%0Aname%3A%20KBR%2C%20Inc.%0Amarket%3A%20NASDAQ%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>Keysight Technologies <span class="ticker">(KEYS)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Information Technology</div>
+  <div class="industry-stat">업종 참고: RS 평균 75/99(업종 중 상위 1%) · 오늘 신호 7건 · 나스닥종합 대비 +14.7%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Information Technology (램 리서치·Onto Innovation 등 16종목)<br>섹터 내 RS 순위: 12/16위 (RS 64/99)<br>섹터 1~3위: 램 리서치(90), Onto Innovation(90), 어플라이드 머티어리얼즈(88)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $320.12</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 1.2x</span><span class="chip">정배열 후 +0.0%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/KEYS.png" alt="Keysight Technologies 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2026 분기(10-Q) · 순이익 +35.8% · EPS +35.6% · 매출 +31.5%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2025 연간(10-K) · 순이익 +38.4% · EPS +39.9% · 매출 +8.0%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge good">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict good">양호</span></div><div class="fval">20일 평균 대비 1.15배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge fair">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict fair">보통</span></div><div class="fval">RS 등급 64/99 (유니버스 1950종목 중 백분위) · 지수대비 -12.2%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3AKEYS" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/KEYS" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20KEYS&body=ticker%3A%20KEYS%0Aname%3A%20Keysight%20Technologies%0Amarket%3A%20NASDAQ%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>Kinsale Capital Group <span class="ticker">(KNSL)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Financials</div>
+  <div class="industry-stat">업종 참고: RS 평균 72/99(업종 중 상위 1%) · 오늘 신호 3건 · 나스닥종합 대비 -3.1%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Financials (HealthEquity·News Corp (Class B) 등 22종목)<br>섹터 내 RS 순위: 17/22위 (RS 56/99)<br>섹터 1~3위: HealthEquity(90), News Corp (Class B)(90), News Corp (Class A)(88)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $387.95</div>
+  <div class="chips"><span class="chip">정배열 8일차</span><span class="chip">거래량비 0.9x</span><span class="chip">정배열 후 +2.3%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/KNSL.png" alt="Kinsale Capital Group 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2026 분기(10-Q) · 순이익 +31.1% · EPS +34.0% · 매출 +16.8%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2025 연간(10-K) · 순이익 +21.4% · EPS +21.8% · 매출 +18.0%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.94배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge fair">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict fair">보통</span></div><div class="fval">RS 등급 56/99 (유니버스 1950종목 중 백분위) · 지수대비 -17.2%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3AKNSL" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/KNSL" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20KNSL&body=ticker%3A%20KNSL%0Aname%3A%20Kinsale%20Capital%20Group%0Amarket%3A%20NASDAQ%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>Lincoln Electric <span class="ticker">(LECO)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Industrials</div>
+  <div class="industry-stat">업종 참고: RS 평균 55/99(업종 중 상위 18%) · 오늘 신호 10건 · 나스닥종합 대비 -17.1%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Industrials (MSC Industrial Direct·W. W. Grainger 등 24종목)<br>섹터 내 RS 순위: 9/24위 (RS 62/99)<br>섹터 1~3위: MSC Industrial Direct(88), W. W. Grainger(79), Nordson Corporation(78)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $280.15</div>
+  <div class="chips"><span class="chip">정배열 10일차</span><span class="chip">거래량비 1.2x</span><span class="chip">정배열 후 -2.4%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/LECO.png" alt="Lincoln Electric 차트" loading="lazy">
+  <div class="pattern-label">🧪 더블바텀 유사(실험적)</div>
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2026 분기(10-Q) · 순이익 +10.5% · EPS +12.5% · 매출 +12.0%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2025 연간(10-K) · 순이익 +11.7% · EPS +14.4% · 매출 +5.6%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge good">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict good">양호</span></div><div class="fval">20일 평균 대비 1.19배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge fair">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict fair">보통</span></div><div class="fval">RS 등급 62/99 (유니버스 1950종목 중 백분위) · 지수대비 -13.9%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3ALECO" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/LECO" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20LECO&body=ticker%3A%20LECO%0Aname%3A%20Lincoln%20Electric%0Amarket%3A%20NASDAQ%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>Littelfuse <span class="ticker">(LFUS)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Information Technology</div>
+  <div class="industry-stat">업종 참고: RS 평균 75/99(업종 중 상위 1%) · 오늘 신호 7건 · 나스닥종합 대비 +14.7%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Industrials (nVent Electric plc·WESCO International 등 19종목)<br>섹터 내 RS 순위: 5/19위 (RS 79/99)<br>섹터 1~3위: nVent Electric plc(88), WESCO International(81), EnerSys(80)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $418.72</div>
+  <div class="chips"><span class="chip">정배열 6일차</span><span class="chip">거래량비 0.8x</span><span class="chip">정배열 후 +0.9%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/LFUS.png" alt="Littelfuse 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2026 분기(10-Q) · 순이익 +72.5% · EPS +69.1% · 매출 +18.5%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge poor">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict poor">미흡</span></div><div class="fval">2025 연간(10-K) · 순이익 적자전환($+100M→$-72M) · EPS 적자전환($+4.0→$-2.9) · 매출 +8.9%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.80배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge good">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict good">양호</span></div><div class="fval">RS 등급 79/99 (유니버스 1950종목 중 백분위) · 지수대비 +0.9%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3ALFUS" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/LFUS" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20LFUS&body=ticker%3A%20LFUS%0Aname%3A%20Littelfuse%0Amarket%3A%20NASDAQ%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>McCormick &amp; Company <span class="ticker">(MKC)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Consumer Staples</div>
+  <div class="industry-stat">업종 참고: RS 평균 52/99(업종 중 상위 22%) · 오늘 신호 5건 · 나스닥종합 대비 -18.7%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Consumer Staples (Target Corporation·J.M. Smucker Company (The) 등 22종목)<br>섹터 내 RS 순위: 20/22위 (RS 29/99)<br>섹터 1~3위: Target Corporation(93), J.M. Smucker Company (The)(77), 코카콜라(76)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $54.48</div>
+  <div class="chips"><span class="chip">정배열 2일차</span><span class="chip">거래량비 0.8x</span><span class="chip">정배열 후 -3.1%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/MKC.png" alt="McCormick &amp; Company 차트" loading="lazy">
+  <div class="pattern-label">🧪 역헤드앤숄더 유사(실험적)</div>
+  <div class="factors"><div class="factor-row"><span class="badge poor">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict poor">미흡</span></div><div class="fval">2026 분기(10-Q) · 순이익 -14.2% · EPS -13.8% · 매출 +16.7%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2025 연간(10-K) · 순이익 +0.1% · EPS +0.3% · 매출 +1.7%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.77배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge poor">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict poor">미흡</span></div><div class="fval">RS 등급 29/99 (유니버스 1950종목 중 백분위) · 지수대비 -36.1%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3AMKC" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/MKC" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20MKC&body=ticker%3A%20MKC%0Aname%3A%20McCormick%20%26%20Company%0Amarket%3A%20NASDAQ%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>Permian Resources <span class="ticker">(PR)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Energy</div>
+  <div class="industry-stat">업종 참고: RS 평균 66/99(업종 중 상위 5%) · 오늘 신호 1건 · 나스닥종합 대비 -3.7%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Energy (APA Corporation·Chord Energy 등 17종목)<br>섹터 내 RS 순위: 4/17위 (RS 83/99)<br>섹터 1~3위: APA Corporation(88), Chord Energy(85), Ovintiv(85)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $22.75</div>
+  <div class="chips"><span class="chip">정배열 2일차</span><span class="chip">거래량비 1.3x</span><span class="chip">정배열 후 -2.4%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/PR.png" alt="Permian Resources 차트" loading="lazy">
+  <div class="pattern-label">🧪 역헤드앤숄더 유사(실험적)</div>
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2026 분기(10-Q) · 순이익 +282.6% · EPS +232.1% · 매출 +55.1%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge poor">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict poor">미흡</span></div><div class="fval">2025 연간(10-K) · 순이익 -5.0% · EPS -11.7% · 매출 +1.3%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge good">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict good">양호</span></div><div class="fval">20일 평균 대비 1.29배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge good">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict good">우수</span></div><div class="fval">RS 등급 83/99 (유니버스 1950종목 중 백분위) · 지수대비 +6.1%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3APR" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/PR" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20PR&body=ticker%3A%20PR%0Aname%3A%20Permian%20Resources%0Amarket%3A%20NASDAQ%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>리제네론 파머슈티컬스 <span class="ticker">(REGN)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Health Care</div>
+  <div class="industry-stat">업종 참고: RS 평균 71/99(업종 중 상위 2%) · 오늘 신호 11건 · 나스닥종합 대비 +3.0%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Health Care (머크·Biogen 등 15종목)<br>섹터 내 RS 순위: 11/15위 (RS 65/99)<br>섹터 1~3위: 머크(87), Biogen(81), 일라이 릴리(80)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $814.79</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 0.7x</span><span class="chip">정배열 후 +0.0%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/REGN.png" alt="리제네론 파머슈티컬스 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge poor">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict poor">미흡</span></div><div class="fval">2026 분기(10-Q) · 순이익 -6.8% · EPS -4.5% · 매출 +16.7%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2025 연간(10-K) · 순이익 +2.1% · EPS +8.2% · 매출 +1.0%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.73배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge fair">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict fair">보통</span></div><div class="fval">RS 등급 65/99 (유니버스 1950종목 중 백분위) · 지수대비 -11.9%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3AREGN" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/REGN" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20REGN&body=ticker%3A%20REGN%0Aname%3A%20%EB%A6%AC%EC%A0%9C%EB%84%A4%EB%A1%A0%20%ED%8C%8C%EB%A8%B8%EC%8A%88%ED%8B%B0%EC%BB%AC%EC%8A%A4%0Amarket%3A%20NASDAQ%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>SAP(ADR) <span class="ticker">(SAP)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NYSE</span>
+  </header>
+  <div class="industry">정보없음</div>
+  
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Information Technology (Nutanix·UiPath 등 11종목)<br>섹터 내 RS 순위: 9/11위 (RS 71/99)<br>섹터 1~3위: Nutanix(95), UiPath(95), Manhattan Associates(94)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $216.93</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 0.6x</span><span class="chip">정배열 후 +0.0%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/SAP.png" alt="SAP(ADR) 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge muted">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">데이터 없음 — SEC EDGAR 조회 실패 또는 XBRL 미제출</div></div></div><div class="factor-row"><span class="badge muted">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">데이터 없음 — SEC EDGAR 조회 실패 또는 10-K 미제출</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.64배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge good">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict good">양호</span></div><div class="fval">RS 등급 71/99 (유니버스 1950종목 중 백분위) · 지수대비 -7.0%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NYSE%3ASAP" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/SAP" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20SAP&body=ticker%3A%20SAP%0Aname%3A%20SAP%28ADR%29%0Amarket%3A%20NYSE%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>Silicon Labs <span class="ticker">(SLAB)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Information Technology</div>
+  <div class="industry-stat">업종 참고: RS 평균 75/99(업종 중 상위 1%) · 오늘 신호 7건 · 나스닥종합 대비 +14.7%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): 기초 화학물질 제조업 (Silicon Labs·컴캐스트 홀딩스 우선주 등 14종목)<br>섹터 내 RS 순위: 1/14위 (RS 70/99)<br>섹터 1~3위: Silicon Labs(70), 컴캐스트 홀딩스 우선주(65), 워너 브로스 디스커버리(61)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $218.37</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 1.3x</span><span class="chip">정배열 후 +0.0%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/SLAB.png" alt="Silicon Labs 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge fair">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict fair">보통</span></div><div class="fval">2026 분기(10-Q) · 순이익 적자축소($-22M→$-11M) · EPS 적자축소($-0.7→$-0.3) · 매출 +18.3%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비 · 적자폭은 줄었으나 여전히 적자 — 오닐의 이익성장 기준은 미충족</div></div></div><div class="factor-row"><span class="badge fair">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict fair">보통</span></div><div class="fval">2025 연간(10-K) · 순이익 적자축소($-191M→$-65M) · EPS 적자축소($-5.9→$-2.0) · 매출 +34.3%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비 · 적자폭은 줄었으나 여전히 적자 — 오닐의 이익성장 기준은 미충족</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge good">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict good">양호</span></div><div class="fval">20일 평균 대비 1.28배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge good">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict good">양호</span></div><div class="fval">RS 등급 70/99 (유니버스 1950종목 중 백분위) · 지수대비 -8.2%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3ASLAB" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/SLAB" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20SLAB&body=ticker%3A%20SLAB%0Aname%3A%20Silicon%20Labs%0Amarket%3A%20NASDAQ%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>스포티파이 테크놀로지 <span class="ticker">(SPOT)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">정보없음</div>
+  
+  
+  <div class="stats">종가 $552.57</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 0.6x</span><span class="chip">정배열 후 +0.0%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/SPOT.png" alt="스포티파이 테크놀로지 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge muted">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">데이터 없음 — SEC EDGAR 조회 실패 또는 XBRL 미제출</div></div></div><div class="factor-row"><span class="badge muted">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">데이터 없음 — SEC EDGAR 조회 실패 또는 10-K 미제출</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.60배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge muted">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">해당 종목의 가격 이력이 부족해 RS 등급 산출 불가</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge muted">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict muted">판정불가</span></div><div class="fval">지수 데이터 조회 실패 또는 판정 불가</div><div class="fnote">실제 매매에는 미적용 — 표시 전용</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3ASPOT" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/SPOT" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20SPOT&body=ticker%3A%20SPOT%0Aname%3A%20%EC%8A%A4%ED%8F%AC%ED%8B%B0%ED%8C%8C%EC%9D%B4%20%ED%85%8C%ED%81%AC%EB%86%80%EB%A1%9C%EC%A7%80%0Amarket%3A%20NASDAQ%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>UFP Industries <span class="ticker">(UFPI)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Industrials</div>
+  <div class="industry-stat">업종 참고: RS 평균 55/99(업종 중 상위 18%) · 오늘 신호 10건 · 나스닥종합 대비 -17.1%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Industrials (SharkNinja·Owens Corning 등 24종목)<br>섹터 내 RS 순위: 17/24위 (RS 37/99)<br>섹터 1~3위: SharkNinja(94), Owens Corning(86), Stanley Black &amp; Decker(82)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $88.73</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 0.8x</span><span class="chip">정배열 후 +0.0%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/UFPI.png" alt="UFP Industries 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge poor">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict poor">미흡</span></div><div class="fval">2026 분기(10-Q) · 순이익 -17.7% · EPS -12.9% · 매출 +2.6%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge poor">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict poor">미흡</span></div><div class="fval">2025 연간(10-K) · 순이익 -28.9% · EPS -26.1% · 매출 -5.0%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.79배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge fair">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict fair">보통</span></div><div class="fval">RS 등급 37/99 (유니버스 1950종목 중 백분위) · 지수대비 -29.7%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3AUFPI" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/UFPI" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20UFPI&body=ticker%3A%20UFPI%0Aname%3A%20UFP%20Industries%0Amarket%3A%20NASDAQ%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>UGI Corp <span class="ticker">(UGI)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Utilities</div>
+  <div class="industry-stat">업종 참고: RS 평균 50/99(업종 중 상위 30%) · 오늘 신호 3건 · 나스닥종합 대비 -21.0%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Utilities (UGI Corp·Edison International 등 3종목)<br>섹터 내 RS 순위: 1/3위 (RS 64/99)<br>섹터 1~3위: UGI Corp(64), Edison International(60), PG&amp;E Corporation(52)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $38.35</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 0.7x</span><span class="chip">정배열 후 +0.0%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/UGI.png" alt="UGI Corp 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge poor">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict poor">미흡</span></div><div class="fval">2026 분기(10-Q) · 순이익 적자축소($-163M→$-133M) · EPS 적자축소($-0.8→$-0.6) · 매출 -4.5%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비 · 적자폭은 줄었으나 여전히 적자 — 오닐의 이익성장 기준은 미충족</div></div></div><div class="factor-row"><span class="badge good">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2025 연간(10-K) · 순이익 +152.0% · EPS +147.2% · 매출 +1.1%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.71배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge fair">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict fair">보통</span></div><div class="fval">RS 등급 64/99 (유니버스 1950종목 중 백분위) · 지수대비 -12.6%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3AUGI" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/UGI" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20UGI&body=ticker%3A%20UGI%0Aname%3A%20UGI%20Corp%0Amarket%3A%20NASDAQ%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>유니레버(ADR) <span class="ticker">(UL)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NYSE</span>
+  </header>
+  <div class="industry">정보없음</div>
+  
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Consumer Staples (3M·Henry Schein 등 10종목)<br>섹터 내 RS 순위: 8/10위 (RS 44/99)<br>섹터 1~3위: 3M(75), Henry Schein(74), Kenvue(63)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $65.15</div>
+  <div class="chips"><span class="chip">정배열 9일차</span><span class="chip">거래량비 1.1x</span><span class="chip">정배열 후 +3.9%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/UL.png" alt="유니레버(ADR) 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge muted">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">데이터 없음 — SEC EDGAR 조회 실패 또는 XBRL 미제출</div></div></div><div class="factor-row"><span class="badge muted">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">데이터 없음 — SEC EDGAR 조회 실패 또는 10-K 미제출</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge good">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict good">양호</span></div><div class="fval">20일 평균 대비 1.09배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge fair">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict fair">보통</span></div><div class="fval">RS 등급 44/99 (유니버스 1950종목 중 백분위) · 지수대비 -24.1%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NYSE%3AUL" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/UL" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20UL&body=ticker%3A%20UL%0Aname%3A%20%EC%9C%A0%EB%8B%88%EB%A0%88%EB%B2%84%28ADR%29%0Amarket%3A%20NYSE%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>Unum <span class="ticker">(UNM)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Financials</div>
+  <div class="industry-stat">업종 참고: RS 평균 72/99(업종 중 상위 1%) · 오늘 신호 3건 · 나스닥종합 대비 -3.1%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Financials (Voya Financial·SEI Investments Company 등 17종목)<br>섹터 내 RS 순위: 5/17위 (RS 87/99)<br>섹터 1~3위: Voya Financial(94), SEI Investments Company(90), MetLife(89)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $89.69</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 0.7x</span><span class="chip">정배열 후 +0.0%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/UNM.png" alt="Unum 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge poor">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict poor">미흡</span></div><div class="fval">2026 분기(10-Q) · 순이익 -23.5% · EPS -16.1% · 매출 +0.3%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge poor">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict poor">미흡</span></div><div class="fval">2025 연간(10-K) · 순이익 -58.5% · EPS -54.9% · 매출 +1.5%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.75배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge good">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict good">우수</span></div><div class="fval">RS 등급 87/99 (유니버스 1950종목 중 백분위) · 지수대비 +11.9%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3AUNM" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/UNM" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20UNM&body=ticker%3A%20UNM%0Aname%3A%20Unum%0Amarket%3A%20NASDAQ%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>West Pharmaceutical Services <span class="ticker">(WST)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Health Care</div>
+  <div class="industry-stat">업종 참고: RS 평균 71/99(업종 중 상위 2%) · 오늘 신호 11건 · 나스닥종합 대비 +3.0%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Industrials (NewMarket Corporation·West Pharmaceutical Services 등 6종목)<br>섹터 내 RS 순위: 2/6위 (RS 92/99)<br>섹터 1~3위: NewMarket Corporation(93), West Pharmaceutical Services(92), United Rentals(87)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $348.48</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 0.7x</span><span class="chip">정배열 후 +0.0%</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/WST.png" alt="West Pharmaceutical Services 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2026 분기(10-Q) · 순이익 +16.8% · EPS +18.1% · 매출 +13.8%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2025 연간(10-K) · 순이익 +0.2% · EPS +1.5% · 매출 +6.3%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.68배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge good">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict good">우수</span></div><div class="fval">RS 등급 92/99 (유니버스 1950종목 중 백분위) · 지수대비 +24.3%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3AWST" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/WST" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20WST&body=ticker%3A%20WST%0Aname%3A%20West%20Pharmaceutical%20Services%0Amarket%3A%20NASDAQ%0Ascanner%3A%20launchpad%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article></div>
+  <details class="full-results">
+    <summary>전체 50종목 결과 보기 <a href="assets/2026-08-26/launchpad.csv" class="csv-link" onclick="event.stopPropagation()">CSV 다운로드</a></summary>
+    <div class="table-wrap"><table><thead><tr><th>종목</th><th>종가</th><th>정배열</th><th>거래량비</th><th>정배열 후</th></tr></thead><tbody><tr><td>Autoliv <span class="ticker-sm">(ALV)</span></td><td>$123.53</td><td>8일차</td><td>1.0x</td><td>+2.3%</td></tr><tr><td>Avery Dennison <span class="ticker-sm">(AVY)</span></td><td>$182.33</td><td>4일차</td><td>0.9x</td><td>-0.8%</td></tr><tr><td>Becton Dickinson <span class="ticker-sm">(BDX)</span></td><td>$190.21</td><td>10일차</td><td>0.8x</td><td>+4.5%</td></tr><tr><td>Belden Inc. <span class="ticker-sm">(BDC)</span></td><td>$118.09</td><td>4일차</td><td>0.7x</td><td>-3.6%</td></tr><tr class="is-new"><td>BorgWarner <span class="ticker-sm">(BWA)</span></td><td>$65.10</td><td>1일차</td><td>0.8x</td><td>+0.0%</td></tr><tr><td>Brunswick <span class="ticker-sm">(BC)</span></td><td>$79.67</td><td>5일차</td><td>0.9x</td><td>-1.7%</td></tr><tr class="is-new"><td>CNH Industrial <span class="ticker-sm">(CNH)</span></td><td>$11.56</td><td>1일차</td><td>1.0x</td><td>+0.0%</td></tr><tr class="is-new"><td>Cencora <span class="ticker-sm">(COR)</span></td><td>$328.06</td><td>1일차</td><td>0.8x</td><td>+0.0%</td></tr><tr><td>Chipotle Mexican Grill <span class="ticker-sm">(CMG)</span></td><td>$37.34</td><td>6일차</td><td>0.7x</td><td>+7.7%</td></tr><tr><td>Dollar General <span class="ticker-sm">(DG)</span></td><td>$122.78</td><td>5일차</td><td>1.7x</td><td>+1.8%</td></tr><tr class="is-new"><td>EXL Service <span class="ticker-sm">(EXLS)</span></td><td>$37.45</td><td>2일차</td><td>0.6x</td><td>-0.6%</td></tr><tr><td>Edwards Lifesciences <span class="ticker-sm">(EW)</span></td><td>$90.78</td><td>5일차</td><td>0.9x</td><td>+1.1%</td></tr><tr><td>Erie Indemnity <span class="ticker-sm">(ERIE)</span></td><td>$257.27</td><td>7일차</td><td>0.8x</td><td>+0.1%</td></tr><tr><td>Essential Utilities <span class="ticker-sm">(WTRG)</span></td><td>$40.76</td><td>5일차</td><td>0.9x</td><td>+0.9%</td></tr><tr><td>FedEx <span class="ticker-sm">(FDX)</span></td><td>$335.99</td><td>5일차</td><td>0.8x</td><td>+3.1%</td></tr><tr><td>General Mills <span class="ticker-sm">(GIS)</span></td><td>$40.08</td><td>6일차</td><td>1.1x</td><td>+0.2%</td></tr><tr><td>Guidewire Software <span class="ticker-sm">(GWRE)</span></td><td>$191.07</td><td>4일차</td><td>0.8x</td><td>+1.0%</td></tr><tr class="is-new"><td>IES Holdings <span class="ticker-sm">(IESC)</span></td><td>$313.23</td><td>7일차</td><td>1.5x</td><td>-58.6%</td></tr><tr class="is-new"><td>ITT Inc. <span class="ticker-sm">(ITT)</span></td><td>$205.98</td><td>1일차</td><td>0.7x</td><td>+0.0%</td></tr><tr class="is-new"><td>KBR, Inc. <span class="ticker-sm">(KBR)</span></td><td>$37.69</td><td>2일차</td><td>0.6x</td><td>+0.0%</td></tr><tr class="is-new"><td>Keysight Technologies <span class="ticker-sm">(KEYS)</span></td><td>$320.12</td><td>1일차</td><td>1.2x</td><td>+0.0%</td></tr><tr class="is-new"><td>Kinsale Capital Group <span class="ticker-sm">(KNSL)</span></td><td>$387.95</td><td>8일차</td><td>0.9x</td><td>+2.3%</td></tr><tr class="is-new"><td>Lincoln Electric <span class="ticker-sm">(LECO)</span></td><td>$280.15</td><td>10일차</td><td>1.2x</td><td>-2.4%</td></tr><tr class="is-new"><td>Littelfuse <span class="ticker-sm">(LFUS)</span></td><td>$418.72</td><td>6일차</td><td>0.8x</td><td>+0.9%</td></tr><tr class="is-new"><td>McCormick &amp; Company <span class="ticker-sm">(MKC)</span></td><td>$54.48</td><td>2일차</td><td>0.8x</td><td>-3.1%</td></tr><tr><td>Novanta <span class="ticker-sm">(NOVT)</span></td><td>$143.96</td><td>5일차</td><td>0.7x</td><td>-1.1%</td></tr><tr><td>PG&amp;E Corporation <span class="ticker-sm">(PCG)</span></td><td>$18.22</td><td>6일차</td><td>0.7x</td><td>+3.2%</td></tr><tr class="is-new"><td>Permian Resources <span class="ticker-sm">(PR)</span></td><td>$22.75</td><td>2일차</td><td>1.3x</td><td>-2.4%</td></tr><tr class="is-new"><td>SAP(ADR) <span class="ticker-sm">(SAP)</span></td><td>$216.93</td><td>1일차</td><td>0.6x</td><td>+0.0%</td></tr><tr><td>Sabra Health Care REIT <span class="ticker-sm">(SBRA)</span></td><td>$21.01</td><td>4일차</td><td>0.7x</td><td>+3.0%</td></tr><tr><td>Service Corp Intl <span class="ticker-sm">(SCI)</span></td><td>$85.38</td><td>4일차</td><td>0.7x</td><td>+2.5%</td></tr><tr class="is-new"><td>Silicon Labs <span class="ticker-sm">(SLAB)</span></td><td>$218.37</td><td>1일차</td><td>1.3x</td><td>+0.0%</td></tr><tr><td>Skyworks Solutions <span class="ticker-sm">(SWKS)</span></td><td>$66.62</td><td>5일차</td><td>0.6x</td><td>-1.9%</td></tr><tr><td>Sprouts Farmers Market <span class="ticker-sm">(SFM)</span></td><td>$86.83</td><td>7일차</td><td>0.7x</td><td>+10.1%</td></tr><tr><td>Steris <span class="ticker-sm">(STE)</span></td><td>$236.77</td><td>5일차</td><td>0.7x</td><td>+0.4%</td></tr><tr><td>Toro <span class="ticker-sm">(TTC)</span></td><td>$100.35</td><td>8일차</td><td>1.2x</td><td>+2.9%</td></tr><tr class="is-new"><td>UFP Industries <span class="ticker-sm">(UFPI)</span></td><td>$88.73</td><td>1일차</td><td>0.8x</td><td>+0.0%</td></tr><tr class="is-new"><td>UGI Corp <span class="ticker-sm">(UGI)</span></td><td>$38.35</td><td>1일차</td><td>0.7x</td><td>+0.0%</td></tr><tr class="is-new"><td>Unum <span class="ticker-sm">(UNM)</span></td><td>$89.69</td><td>1일차</td><td>0.7x</td><td>+0.0%</td></tr><tr class="is-new"><td>West Pharmaceutical Services <span class="ticker-sm">(WST)</span></td><td>$348.48</td><td>1일차</td><td>0.7x</td><td>+0.0%</td></tr><tr class="is-new"><td>리제네론 파머슈티컬스 <span class="ticker-sm">(REGN)</span></td><td>$814.79</td><td>1일차</td><td>0.7x</td><td>+0.0%</td></tr><tr><td>메드트로닉 <span class="ticker-sm">(MDT)</span></td><td>$92.02</td><td>6일차</td><td>0.9x</td><td>-2.2%</td></tr><tr><td>모더나 <span class="ticker-sm">(MRNA)</span></td><td>$149.66</td><td>6일차</td><td>0.8x</td><td>-14.2%</td></tr><tr><td>서던 코퍼 <span class="ticker-sm">(SCCO)</span></td><td>$213.75</td><td>6일차</td><td>1.0x</td><td>+9.8%</td></tr><tr><td>스트라이커 <span class="ticker-sm">(SYK)</span></td><td>$329.67</td><td>5일차</td><td>0.7x</td><td>+0.6%</td></tr><tr class="is-new"><td>스포티파이 테크놀로지 <span class="ticker-sm">(SPOT)</span></td><td>$552.57</td><td>1일차</td><td>0.6x</td><td>+0.0%</td></tr><tr><td>아제닉스(ADR) <span class="ticker-sm">(ARGX)</span></td><td>$1,047.10</td><td>6일차</td><td>1.2x</td><td>+1.4%</td></tr><tr><td>애보트 래브러토리스 <span class="ticker-sm">(ABT)</span></td><td>$114.10</td><td>8일차</td><td>0.9x</td><td>+3.4%</td></tr><tr><td>에퀴닉스 <span class="ticker-sm">(EQIX)</span></td><td>$1,079.61</td><td>7일차</td><td>0.8x</td><td>-0.5%</td></tr><tr class="is-new"><td>유니레버(ADR) <span class="ticker-sm">(UL)</span></td><td>$65.15</td><td>9일차</td><td>1.1x</td><td>+3.9%</td></tr></tbody></table></div><p class="legend">■ 굵은 줄 = 오늘 카드로 표시된 종목(신규·재포착)</p>
+  </details>
+</section><section class="scanner-section" id="newhigh">
+  <h2>52주 신고가 돌파 <span class="count">신규 3건 · 전체 4종목</span></h2>
+  <div class="cards"><article class="card">
+  <header class="card-head">
+    <h3>뱅크 오브 노바스코샤 <span class="ticker">(BNS)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">정보없음</div>
+  
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Financials (State Street Corporation·BNY Mellon 등 17종목)<br>섹터 내 RS 순위: 7/17위 (RS 85/99)<br>섹터 1~3위: State Street Corporation(94), BNY Mellon(91), UBS 그룹(89)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $93.59</div>
+  <div class="chips"><span class="chip">고점대비 +0.2%</span><span class="chip">6개월 +23.3%</span><span class="chip">갱신 4회</span><span class="chip">거래량비 2.0x</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/BNS.png" alt="뱅크 오브 노바스코샤 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge muted">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">데이터 없음 — SEC EDGAR 조회 실패 또는 XBRL 미제출</div></div></div><div class="factor-row"><span class="badge muted">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">데이터 없음 — SEC EDGAR 조회 실패 또는 10-K 미제출</div></div></div><div class="factor-row"><span class="badge good">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict good">우수</span></div><div class="fval">고점대비 +0.2% · 최근 20일 중 4회 갱신 · 6개월 모멘텀 +23.3%</div></div></div><div class="factor-row"><span class="badge good">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict good">우수</span></div><div class="fval">20일 평균 대비 1.98배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge good">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict good">우수</span></div><div class="fval">RS 등급 85/99 (유니버스 1950종목 중 백분위) · 지수대비 +8.9%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3ABNS" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/BNS" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20BNS&body=ticker%3A%20BNS%0Aname%3A%20%EB%B1%85%ED%81%AC%20%EC%98%A4%EB%B8%8C%20%EB%85%B8%EB%B0%94%EC%8A%A4%EC%BD%94%EC%83%A4%0Amarket%3A%20NASDAQ%0Ascanner%3A%20newhigh%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>Expeditors International <span class="ticker">(EXPD)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Industrials</div>
+  <div class="industry-stat">업종 참고: RS 평균 55/99(업종 중 상위 18%) · 오늘 신호 10건 · 나스닥종합 대비 -17.1%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Industrials (Expeditors International·J.B. Hunt 등 13종목)<br>섹터 내 RS 순위: 1/13위 (RS 88/99)<br>섹터 1~3위: Expeditors International(88), J.B. Hunt(77), Ryder(76)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $190.18</div>
+  <div class="chips"><span class="chip">고점대비 +0.1%</span><span class="chip">6개월 +34.1%</span><span class="chip">갱신 1회</span><span class="chip">거래량비 0.6x</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/EXPD.png" alt="Expeditors International 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2026 분기(10-Q) · 순이익 +45.0% · EPS +51.5% · 매출 +32.1%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2025 연간(10-K) · 순이익 +0.0% · EPS +4.0% · 매출 +4.4%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict good">우수</span></div><div class="fval">고점대비 +0.1% · 최근 20일 중 1회 갱신 · 6개월 모멘텀 +34.1%</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.64배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge good">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict good">우수</span></div><div class="fval">RS 등급 88/99 (유니버스 1950종목 중 백분위) · 지수대비 +15.6%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3AEXPD" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/EXPD" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20EXPD&body=ticker%3A%20EXPD%0Aname%3A%20Expeditors%20International%0Amarket%3A%20NASDAQ%0Ascanner%3A%20newhigh%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>J.M. Smucker Company (The) <span class="ticker">(SJM)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">NASDAQ</span>
+  </header>
+  <div class="industry">Consumer Staples</div>
+  <div class="industry-stat">업종 참고: RS 평균 52/99(업종 중 상위 22%) · 오늘 신호 5건 · 나스닥종합 대비 -18.7%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): Consumer Staples (Target Corporation·J.M. Smucker Company (The) 등 22종목)<br>섹터 내 RS 순위: 2/22위 (RS 77/99)<br>섹터 1~3위: Target Corporation(93), J.M. Smucker Company (The)(77), 코카콜라(76)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 $130.90</div>
+  <div class="chips"><span class="chip">고점대비 +2.5%</span><span class="chip">6개월 +22.8%</span><span class="chip">갱신 1회</span><span class="chip">거래량비 2.5x</span></div>
+  
+  <img class="chart" src="assets/2026-08-26/SJM.png" alt="J.M. Smucker Company (The) 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2027 분기(10-Q) · 순이익 흑자전환($-44M→$+324M) · EPS 흑자전환($-0.4→$+3.0) · 매출 +5.0%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge fair">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict fair">보통</span></div><div class="fval">2026 연간(10-K) · 순이익 적자축소($-1,231M→$-139M) · EPS 적자축소($-12→$-1.3) · 매출 +3.7%</div><div class="fnote">SEC EDGAR(10-Q/10-K) 기준 · 연간 전년동기 대비 · 적자폭은 줄었으나 여전히 적자 — 오닐의 이익성장 기준은 미충족</div></div></div><div class="factor-row"><span class="badge good">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict good">우수</span></div><div class="fval">고점대비 +2.5% · 최근 20일 중 1회 갱신 · 6개월 모멘텀 +22.8%</div></div></div><div class="factor-row"><span class="badge good">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict good">우수</span></div><div class="fval">20일 평균 대비 2.47배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge good">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict good">양호</span></div><div class="fval">RS 등급 77/99 (유니버스 1950종목 중 백분위) · 지수대비 -0.8%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge muted">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">미국 종목은 기관 수급 데이터 소스 없음 (SEC Form 13F는 최대 45일 지연되는 분기 스냅샷이라 부적합)</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">IXIC 지수가 60일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://www.tradingview.com/chart/?symbol=NASDAQ%3ASJM" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.yahoo.com/quote/SJM" target="_blank" rel="noopener">야후 파이낸스</a>
+    <a class="watchlist-link" href="https://github.com/jiksooshin-dotcom/stock-scanner/issues/new?title=watchlist%3A%20add%20SJM&body=ticker%3A%20SJM%0Aname%3A%20J.M.%20Smucker%20Company%20%28The%29%0Amarket%3A%20NASDAQ%0Ascanner%3A%20newhigh%0A" target="_blank" rel="noopener">⭐ 관심종목 담기</a>
+  </div>
+</article></div>
+  <details class="full-results">
+    <summary>전체 4종목 결과 보기 <a href="assets/2026-08-26/newhigh.csv" class="csv-link" onclick="event.stopPropagation()">CSV 다운로드</a></summary>
+    <div class="table-wrap"><table><thead><tr><th>종목</th><th>종가</th><th>고점대비</th><th>6개월</th><th>갱신</th><th>거래량비</th></tr></thead><tbody><tr class="is-new"><td>Expeditors International <span class="ticker-sm">(EXPD)</span></td><td>$190.18</td><td>+0.1%</td><td>+34.1%</td><td>1회</td><td>0.6x</td></tr><tr class="is-new"><td>J.M. Smucker Company (The) <span class="ticker-sm">(SJM)</span></td><td>$130.90</td><td>+2.5%</td><td>+22.8%</td><td>1회</td><td>2.5x</td></tr><tr><td>Revvity <span class="ticker-sm">(RVTY)</span></td><td>$126.35</td><td>+1.1%</td><td>+29.5%</td><td>4회</td><td>0.7x</td></tr><tr class="is-new"><td>뱅크 오브 노바스코샤 <span class="ticker-sm">(BNS)</span></td><td>$93.59</td><td>+0.2%</td><td>+23.3%</td><td>4회</td><td>2.0x</td></tr></tbody></table></div><p class="legend">■ 굵은 줄 = 오늘 카드로 표시된 종목(신규·재포착)</p>
+  </details>
+</section>
+  
+<div class="disclaimer">
+  ⚠️ <b>후보를 좁히는 용도이지 매수 근거가 아닙니다.</b><br>
+  · 위 팩터 중 성공/실패를 구분하는 것은 아직 확인되지 않았습니다
+  (오닐의 +25% 성장 기준은 측정 12칸 중 9칸이 마이너스).<br>
+  · 이 신호로 5슬롯 백테스트 시 코스피가 연 3.3%였던 9년과 +159%였던 최근 2년
+  <b>양쪽 모두 절대 손실</b>이었습니다.<br>
+  · 거래대금은 승률 예측용이 아니라 체결 가능성 판단용입니다 — 오히려 거래대금이
+  큰 종목을 고르면 승률은 떨어집니다(실측 −2.6%p).<br>
+  · 검증 내역: 저장소의 <code>docs/FINDINGS.md</code>
+</div>
+
+  <footer>자동 생성 · <a href="index.html">지난 리포트 목록</a></footer>
+</div>
+</body>
+</html>

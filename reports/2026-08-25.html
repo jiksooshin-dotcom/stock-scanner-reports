@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>2026-08-25 스캔 리포트</title>
+<style>
+:root{--bg:#f7f7f8;--panel:#fff;--text:#1a1a1a;--muted:#6b7280;--border:#e5e7eb;
+--accent:#2563eb;--good:#16a34a;--good-bg:#dcfce7;--fair:#ca8a04;--fair-bg:#fef9c3;
+--poor:#dc2626;--poor-bg:#fee2e2;--chip-bg:#eef2ff;--chip-text:#3730a3;}
+@media(prefers-color-scheme:dark){:root{--bg:#0f1115;--panel:#181b21;--text:#e8e8ea;
+--muted:#9aa1ac;--border:#2a2e37;--accent:#60a5fa;--good:#4ade80;--good-bg:#052e16;
+--fair:#facc15;--fair-bg:#3f2d03;--poor:#f87171;--poor-bg:#450a0a;
+--chip-bg:#1e2547;--chip-text:#c7d2fe;}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif;
+line-height:1.5;}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+header.page-head{padding:20px 16px 8px}
+header.page-head h1{margin:0 0 4px;font-size:1.4rem}
+.subtitle{color:var(--muted);font-size:.9rem}
+.jump{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.jump a{background:var(--panel);border:1px solid var(--border);border-radius:8px;
+padding:6px 12px;color:var(--text);text-decoration:none;font-size:.85rem}
+section.scanner-section{margin:24px 0}
+section.scanner-section h2{font-size:1.1rem;display:flex;align-items:baseline;gap:8px;
+flex-wrap:wrap;border-bottom:2px solid var(--border);padding-bottom:8px}
+.count{font-size:.8rem;color:var(--muted);font-weight:normal}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-top:12px}
+.card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:14px}
+.card-head{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.card-head h3{margin:0;font-size:1.05rem}
+.ticker{color:var(--muted);font-weight:normal;font-size:.85rem}
+.ticker-sm{color:var(--muted);font-size:.8rem}
+.market{font-size:.75rem;color:var(--muted);border:1px solid var(--border);
+border-radius:6px;padding:1px 6px;white-space:nowrap}
+.capture{font-size:.72rem;font-weight:600;border-radius:6px;padding:1px 6px;white-space:nowrap}
+.capture.new{background:#fdecea;color:#c0392b}
+.capture.returning{background:#eef2f7;color:#5a6b82}
+.industry{font-size:.8rem;color:var(--muted);margin-top:2px}
+.industry-stat{font-size:.75rem;color:var(--muted);margin-top:2px}
+.sector-info{font-size:.75rem;color:var(--muted);margin-top:6px;padding:8px 10px;
+background:var(--bg);border-radius:8px;border:1px dashed var(--border)}
+.sector-caveat{display:block;margin-top:4px;font-style:italic;opacity:.85}
+.stats{margin-top:8px;font-size:.9rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.chip{background:var(--chip-bg);color:var(--chip-text);border-radius:6px;
+padding:3px 8px;font-size:.78rem}
+.plan{margin-top:10px;background:var(--bg);border-radius:8px;padding:8px 10px;
+font-size:.85rem;border:1px dashed var(--border)}
+img.chart{width:100%;border-radius:8px;margin-top:10px;display:block}
+.pattern-label{font-size:.75rem;color:var(--muted);margin-top:4px;font-style:italic}
+.factors{margin-top:10px;display:flex;flex-direction:column;gap:6px}
+.factor-row{display:flex;gap:8px;align-items:flex-start}
+.badge{flex:0 0 auto;width:22px;height:22px;border-radius:6px;display:flex;
+align-items:center;justify-content:center;font-size:.72rem;font-weight:700}
+.badge.good{background:var(--good-bg);color:var(--good)}
+.badge.fair{background:var(--fair-bg);color:var(--fair)}
+.badge.poor{background:var(--poor-bg);color:var(--poor)}
+.badge.muted{background:var(--border);color:var(--muted)}
+.factor-body{flex:1;min-width:0}
+.factor-head{font-size:.85rem;display:flex;gap:6px;align-items:baseline;flex-wrap:wrap}
+.verdict{font-size:.72rem;padding:1px 6px;border-radius:5px}
+.verdict.good{background:var(--good-bg);color:var(--good)}
+.verdict.fair{background:var(--fair-bg);color:var(--fair)}
+.verdict.poor{background:var(--poor-bg);color:var(--poor)}
+.verdict.muted{background:var(--border);color:var(--muted)}
+.fval{font-size:.82rem;color:var(--muted);margin-top:1px}
+.fnote{font-size:.75rem;color:var(--muted);font-style:italic;margin-top:1px}
+.links{margin-top:10px;display:flex;gap:10px}
+.links a{color:var(--accent);text-decoration:none;font-size:.82rem}
+.muted-text{color:var(--muted);font-size:.9rem}
+.error{color:var(--poor)}
+details.full-results{margin-top:16px}
+details.full-results summary{cursor:pointer;color:var(--accent);font-size:.9rem;
+padding:6px 0}
+.csv-link{margin-left:10px;font-size:.8rem;color:var(--muted);text-decoration:underline}
+.table-wrap{overflow-x:auto;margin-top:8px}
+table{width:100%;border-collapse:collapse;font-size:.82rem}
+th,td{padding:6px 8px;text-align:left;border-bottom:1px solid var(--border);
+white-space:nowrap}
+th{color:var(--muted);font-weight:600}
+tr.is-new{font-weight:700}
+tr.is-new td:first-child{border-left:3px solid var(--accent);padding-left:6px}
+.legend{font-size:.75rem;color:var(--muted);margin-top:4px}
+.disclaimer{margin:32px 0 16px;background:var(--panel);border:1px solid var(--border);
+border-radius:10px;padding:14px 16px;font-size:.85rem;color:var(--muted)}
+.disclaimer b{color:var(--text)}
+footer{color:var(--muted);font-size:.78rem;text-align:center;padding:16px 0 32px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="page-head">
+    <h1>2026-08-25 스캔 리포트</h1>
+    <div class="subtitle">주식 스크리너 · 매일 자동 생성</div>
+    <nav class="jump"><a href="#launchpad">Launch Pad 스캐너 (8)</a><a href="#newhigh">52주 신고가 돌파 (5)</a></nav>
+  </header>
+  <section class="scanner-section" id="launchpad">
+  <h2>Launch Pad 스캐너 <span class="count">신규 8건 · 전체 29종목</span></h2>
+  <div class="cards"><article class="card">
+  <header class="card-head">
+    <h3>국도화학 <span class="ticker">(007690)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">KOSPI</span>
+  </header>
+  <div class="industry">기초 화학물질 제조업</div>
+  <div class="industry-stat">업종 참고: RS 평균 37/99(업종 중 상위 60%) · 오늘 신호 3건 · 코스피 대비 -25.5%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): 1차 철강 제조업 (케이아이엔엑스·TYM 등 14종목)<br>섹터 내 RS 순위: 3/14위 (RS 54/99)<br>섹터 1~3위: 케이아이엔엑스(84), TYM(54), 국도화학(54)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 38,350 · 거래대금 7.3억</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 0.7x</span><span class="chip">정배열 후 +0.0%</span></div>
+  <div class="plan">손절 35,282 | 목표 47,554 | 수량 260주</div>
+  <img class="chart" src="assets/2026-08-25/007690.png" alt="국도화학 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2026 반기보고서(누적) · 순이익 흑자전환(+nan억원→+439억원) · EPS 흑자전환(+nan원→+5,077원) · 매출 흑자전환(+nan억원→+5,343억원)</div><div class="fnote">DART 공시 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2025 사업보고서(연간) · 순이익 +144.9% · EPS +146.6% · 매출 +6.9%</div><div class="fnote">DART 공시 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.71배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge fair">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict fair">보통</span></div><div class="fval">RS 등급 54/99 (유니버스 1951종목 중 백분위) · 지수대비 -11.5%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge good">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict good">양호</span></div><div class="fval">20일 순매수 +7.90% (거래대금 대비) · 최근절반 -3.65% vs 이전절반 +15.21% (약화) · 순매수 14일 · 누적 +14.1억원</div><div class="fnote">한국투자증권 공식 API(KIS) 기준 · 기관+외국인 합산, 기타법인 제외로 거래대금은 소폭 과소추정 · 임계값은 아직 실측 검증 전 잠정치 — 수급 이력이 쌓이면 다른 지표와 같은 방식으로 구분력을 측정해 조정 예정 · 최근 유입이 이전보다 약해져 한 단계 낮춤</div></div></div><div class="factor-row"><span class="badge poor">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict poor">미흡</span></div><div class="fval">KOSPI 지수가 60일선 아래</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://kr.tradingview.com/chart/?symbol=KRX%3A007690" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.naver.com/item/main.naver?code=007690" target="_blank" rel="noopener">네이버 금융</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>HMM <span class="ticker">(011200)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">KOSPI</span>
+  </header>
+  <div class="industry">해상 운송업</div>
+  <div class="industry-stat">업종 참고: RS 평균 64/99(업종 중 상위 6%) · 오늘 신호 1건 · 코스피 대비 -4.0%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): 해상 운송업 (가비아·오로라 등 25종목)<br>섹터 내 RS 순위: 7/25위 (RS 69/99)<br>섹터 1~3위: 가비아(93), 오로라(89), 팬오션(83)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 22,650 · 거래대금 417억</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 1.2x</span><span class="chip">정배열 후 +0.0%</span></div>
+  <div class="plan">손절 20,838 | 목표 28,086 | 수량 441주</div>
+  <img class="chart" src="assets/2026-08-25/011200.png" alt="HMM 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2026 반기보고서(누적) · 순이익 흑자전환(+nan억원→+4,114억원) · 매출 흑자전환(+nan억원→+34,020억원)</div><div class="fnote">DART 공시 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge poor">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict poor">미흡</span></div><div class="fval">2025 사업보고서(연간) · 순이익 -50.3% · EPS -61.0% · 매출 -6.9%</div><div class="fnote">DART 공시 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge good">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict good">양호</span></div><div class="fval">20일 평균 대비 1.17배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge fair">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict fair">보통</span></div><div class="fval">RS 등급 69/99 (유니버스 1951종목 중 백분위) · 지수대비 -1.9%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge good">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict good">양호</span></div><div class="fval">20일 순매수 +22.35% (거래대금 대비) · 최근절반 +21.40% vs 이전절반 +23.88% (약화) · 순매수 15일 · 누적 +1,551.6억원</div><div class="fnote">한국투자증권 공식 API(KIS) 기준 · 기관+외국인 합산, 기타법인 제외로 거래대금은 소폭 과소추정 · 임계값은 아직 실측 검증 전 잠정치 — 수급 이력이 쌓이면 다른 지표와 같은 방식으로 구분력을 측정해 조정 예정 · 최근 유입이 이전보다 약해져 한 단계 낮춤</div></div></div><div class="factor-row"><span class="badge poor">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict poor">미흡</span></div><div class="fval">KOSPI 지수가 60일선 아래</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://kr.tradingview.com/chart/?symbol=KRX%3A011200" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.naver.com/item/main.naver?code=011200" target="_blank" rel="noopener">네이버 금융</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>CJ CGV <span class="ticker">(079160)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">KOSPI</span>
+  </header>
+  <div class="industry">영화, 비디오물, 방송프로그램 제작 및 배급업</div>
+  <div class="industry-stat">업종 참고: RS 평균 21/99(업종 중 상위 87%) · 오늘 신호 1건 · 코스닥 대비 -2.8%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): 소프트웨어 개발 및 공급업 (리파인·LG생활건강 등 18종목)<br>섹터 내 RS 순위: 7/18위 (RS 51/99)<br>섹터 1~3위: 리파인(90), LG생활건강(82), 시프트업(58)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 5,230 · 거래대금 20억</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 0.5x</span><span class="chip">정배열 후 +0.0%</span></div>
+  <div class="plan">손절 4,812 | 목표 6,485 | 수량 1,912주</div>
+  <img class="chart" src="assets/2026-08-25/079160.png" alt="CJ CGV 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2026 반기보고서(누적) · 순이익 흑자전환(+nan억원→+226억원) · 매출 흑자전환(+nan억원→+5,940억원)</div><div class="fnote">DART 공시 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">데이터 없음 — DART 조회 실패 또는 사업보고서 없음 (DART_API_KEY 필요)</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.49배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge fair">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict fair">보통</span></div><div class="fval">RS 등급 51/99 (유니버스 1951종목 중 백분위) · 지수대비 -13.6%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge poor">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict poor">미흡</span></div><div class="fval">20일 순매수 -0.54% (거래대금 대비) · 최근절반 -10.00% vs 이전절반 +8.50% (약화) · 순매수 10일 · 누적 -4.3억원</div><div class="fnote">한국투자증권 공식 API(KIS) 기준 · 기관+외국인 합산, 기타법인 제외로 거래대금은 소폭 과소추정 · 임계값은 아직 실측 검증 전 잠정치 — 수급 이력이 쌓이면 다른 지표와 같은 방식으로 구분력을 측정해 조정 예정</div></div></div><div class="factor-row"><span class="badge poor">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict poor">미흡</span></div><div class="fval">KOSPI 지수가 60일선 아래</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://kr.tradingview.com/chart/?symbol=KRX%3A079160" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.naver.com/item/main.naver?code=079160" target="_blank" rel="noopener">네이버 금융</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>아이마켓코리아 <span class="ticker">(122900)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">KOSPI</span>
+  </header>
+  <div class="industry">상품 종합 도매업</div>
+  <div class="industry-stat">업종 참고: RS 평균 52/99(업종 중 상위 22%) · 오늘 신호 1건 · 코스피 대비 -13.2%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): 부동산 임대 및 공급업 (Chemed Corp.·KPX홀딩스 등 30종목)<br>섹터 내 RS 순위: 6/30위 (RS 68/99)<br>섹터 1~3위: Chemed Corp.(89), KPX홀딩스(86), 코람코더원리츠(83)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 8,350 · 거래대금 36억</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 5.2x</span><span class="chip">정배열 후 +0.0%</span></div>
+  <div class="plan">손절 7,682 | 목표 10,354 | 수량 1,197주</div>
+  <img class="chart" src="assets/2026-08-25/122900.png" alt="아이마켓코리아 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2026 반기보고서(누적) · 순이익 흑자전환(+nan억원→+191억원) · EPS 흑자전환(+nan원→+517원)</div><div class="fnote">DART 공시 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge poor">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict poor">미흡</span></div><div class="fval">2025 사업보고서(연간) · 순이익 -13.6% · EPS -22.3%</div><div class="fnote">DART 공시 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge good">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict good">우수</span></div><div class="fval">20일 평균 대비 5.21배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge fair">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict fair">보통</span></div><div class="fval">RS 등급 68/99 (유니버스 1951종목 중 백분위) · 지수대비 -2.3%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge good">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict good">양호</span></div><div class="fval">20일 순매수 +6.78% (거래대금 대비) · 최근절반 -12.23% vs 이전절반 +26.47% (약화) · 순매수 10일 · 누적 +10.9억원</div><div class="fnote">한국투자증권 공식 API(KIS) 기준 · 기관+외국인 합산, 기타법인 제외로 거래대금은 소폭 과소추정 · 임계값은 아직 실측 검증 전 잠정치 — 수급 이력이 쌓이면 다른 지표와 같은 방식으로 구분력을 측정해 조정 예정 · 최근 유입이 이전보다 약해져 한 단계 낮춤</div></div></div><div class="factor-row"><span class="badge poor">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict poor">미흡</span></div><div class="fval">KOSPI 지수가 60일선 아래</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://kr.tradingview.com/chart/?symbol=KRX%3A122900" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.naver.com/item/main.naver?code=122900" target="_blank" rel="noopener">네이버 금융</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>아스플로 <span class="ticker">(159010)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">KOSDAQ</span>
+  </header>
+  <div class="industry">일반 목적용 기계 제조업</div>
+  <div class="industry-stat">업종 참고: RS 평균 29/99(업종 중 상위 72%) · 오늘 신호 1건 · 코스닥 대비 +20.8%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): 전자부품 제조업 (아스플로·후성 등 6종목)<br>섹터 내 RS 순위: 1/6위 (RS 99/99)<br>섹터 1~3위: 아스플로(99), 후성(94), 세보엠이씨(86)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 21,100 · 거래대금 65억</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 1.4x</span><span class="chip">정배열 후 +0.0%</span></div>
+  <div class="plan">손절 19,412 | 목표 26,164 | 수량 473주</div>
+  <img class="chart" src="assets/2026-08-25/159010.png" alt="아스플로 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2026 반기보고서(누적) · 순이익 흑자전환(+nan억원→+88억원) · EPS 흑자전환(+nan원→+661원)</div><div class="fnote">DART 공시 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge poor">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict poor">미흡</span></div><div class="fval">2025 사업보고서(연간) · 순이익 적자확대(-24억원→-99억원) · EPS 적자확대(-182원→-769원)</div><div class="fnote">DART 공시 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge good">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict good">양호</span></div><div class="fval">20일 평균 대비 1.37배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge good">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict good">우수</span></div><div class="fval">RS 등급 99/99 (유니버스 1951종목 중 백분위) · 지수대비 +289.5%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge poor">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict poor">미흡</span></div><div class="fval">20일 순매수 -5.12% (거래대금 대비) · 최근절반 -6.86% vs 이전절반 -2.76% (약화) · 순매수 8일 · 누적 -44.6억원</div><div class="fnote">한국투자증권 공식 API(KIS) 기준 · 기관+외국인 합산, 기타법인 제외로 거래대금은 소폭 과소추정 · 임계값은 아직 실측 검증 전 잠정치 — 수급 이력이 쌓이면 다른 지표와 같은 방식으로 구분력을 측정해 조정 예정</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">KOSDAQ 지수가 20일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://kr.tradingview.com/chart/?symbol=KRX%3A159010" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.naver.com/item/main.naver?code=159010" target="_blank" rel="noopener">네이버 금융</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>코스맥스 <span class="ticker">(192820)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">KOSPI</span>
+  </header>
+  <div class="industry">기타 화학제품 제조업</div>
+  <div class="industry-stat">업종 참고: RS 평균 46/99(업종 중 상위 37%) · 오늘 신호 7건 · 코스피 대비 -13.2%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): 기타 화학제품 제조업 (한국콜마·코스메카코리아 등 5종목)<br>섹터 내 RS 순위: 3/5위 (RS 94/99)<br>섹터 1~3위: 한국콜마(97), 코스메카코리아(95), 코스맥스(94)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 289,000 · 거래대금 385억</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 0.8x</span><span class="chip">정배열 후 +0.0%</span></div>
+  <div class="plan">손절 265,880 | 목표 358,360 | 수량 34주</div>
+  <img class="chart" src="assets/2026-08-25/192820.png" alt="코스맥스 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2026 반기보고서(누적) · 순이익 흑자전환(+nan억원→+500억원) · EPS 흑자전환(+nan원→+4,292원) · 매출 흑자전환(+nan억원→+7,949억원)</div><div class="fnote">DART 공시 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2025 사업보고서(연간) · 순이익 +48.2% · EPS +43.4% · 매출 +10.7%</div><div class="fnote">DART 공시 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.84배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge good">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict good">우수</span></div><div class="fval">RS 등급 94/99 (유니버스 1951종목 중 백분위) · 지수대비 +44.1%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge good">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict good">우수</span></div><div class="fval">20일 순매수 +9.05% (거래대금 대비) · 최근절반 +9.38% vs 이전절반 +8.11% (개선) · 순매수 15일 · 누적 +664.4억원</div><div class="fnote">한국투자증권 공식 API(KIS) 기준 · 기관+외국인 합산, 기타법인 제외로 거래대금은 소폭 과소추정 · 임계값은 아직 실측 검증 전 잠정치 — 수급 이력이 쌓이면 다른 지표와 같은 방식으로 구분력을 측정해 조정 예정</div></div></div><div class="factor-row"><span class="badge poor">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict poor">미흡</span></div><div class="fval">KOSPI 지수가 60일선 아래</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://kr.tradingview.com/chart/?symbol=KRX%3A192820" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.naver.com/item/main.naver?code=192820" target="_blank" rel="noopener">네이버 금융</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>샘씨엔에스 <span class="ticker">(252990)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">KOSDAQ</span>
+  </header>
+  <div class="industry">전자부품 제조업</div>
+  <div class="industry-stat">업종 참고: RS 평균 42/99(업종 중 상위 45%) · 오늘 신호 2건 · 코스닥 대비 +28.4%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): 특수 목적용 기계 제조업 (샘씨엔에스·테크윙 등 22종목)<br>섹터 내 RS 순위: 1/22위 (RS 79/99)<br>섹터 1~3위: 샘씨엔에스(79), 테크윙(72), 고영(48)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 12,790 · 거래대금 63억</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 0.8x</span><span class="chip">정배열 후 +0.0%</span></div>
+  <div class="plan">손절 11,767 | 목표 15,860 | 수량 781주</div>
+  <img class="chart" src="assets/2026-08-25/252990.png" alt="샘씨엔에스 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2026 반기보고서(누적) · 순이익 흑자전환(+nan억원→+113억원) · 매출 흑자전환(+nan억원→+313억원)</div><div class="fnote">DART 공시 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2025 사업보고서(연간) · 순이익 +354.0% · 매출 +46.3%</div><div class="fnote">DART 공시 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.77배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge good">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict good">양호</span></div><div class="fval">RS 등급 79/99 (유니버스 1951종목 중 백분위) · 지수대비 +46.8%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge good">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict good">양호</span></div><div class="fval">20일 순매수 +7.42% (거래대금 대비) · 최근절반 +6.22% vs 이전절반 +8.17% (약화) · 순매수 14일 · 누적 +121.3억원</div><div class="fnote">한국투자증권 공식 API(KIS) 기준 · 기관+외국인 합산, 기타법인 제외로 거래대금은 소폭 과소추정 · 임계값은 아직 실측 검증 전 잠정치 — 수급 이력이 쌓이면 다른 지표와 같은 방식으로 구분력을 측정해 조정 예정 · 최근 유입이 이전보다 약해져 한 단계 낮춤</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">KOSDAQ 지수가 20일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://kr.tradingview.com/chart/?symbol=KRX%3A252990" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.naver.com/item/main.naver?code=252990" target="_blank" rel="noopener">네이버 금융</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>리파인 <span class="ticker">(377450)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">KOSDAQ</span>
+  </header>
+  <div class="industry">기타 정보 서비스업</div>
+  <div class="industry-stat">업종 참고: RS 평균 44/99(업종 중 상위 40%) · 오늘 신호 1건 · 코스닥 대비 +21.5%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): 소프트웨어 개발 및 공급업 (리파인·LG생활건강 등 18종목)<br>섹터 내 RS 순위: 1/18위 (RS 90/99)<br>섹터 1~3위: 리파인(90), LG생활건강(82), 시프트업(58)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 16,740 · 거래대금 36억</div>
+  <div class="chips"><span class="chip">정배열 1일차</span><span class="chip">거래량비 1.0x</span><span class="chip">정배열 후 +0.0%</span></div>
+  <div class="plan">손절 15,401 | 목표 20,758 | 수량 597주</div>
+  <img class="chart" src="assets/2026-08-25/377450.png" alt="리파인 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2026 반기보고서(누적) · 순이익 흑자전환(+nan억원→+48억원) · EPS 흑자전환(+nan원→+279원) · 매출 흑자전환(+nan억원→+141억원)</div><div class="fnote">DART 공시 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge poor">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict poor">미흡</span></div><div class="fval">2025 사업보고서(연간) · 순이익 -56.1% · EPS -57.7% · 매출 -9.3%</div><div class="fnote">DART 공시 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge muted">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict muted">데이터 없음</span></div><div class="fval"></div><div class="fnote">신고가 데이터 없음</div></div></div><div class="factor-row"><span class="badge good">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict good">양호</span></div><div class="fval">20일 평균 대비 1.03배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge good">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict good">우수</span></div><div class="fval">RS 등급 90/99 (유니버스 1951종목 중 백분위) · 지수대비 +64.6%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge good">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict good">우수</span></div><div class="fval">20일 순매수 +30.52% (거래대금 대비) · 최근절반 +35.11% vs 이전절반 +0.59% (개선) · 순매수 11일 · 누적 +204.0억원</div><div class="fnote">한국투자증권 공식 API(KIS) 기준 · 기관+외국인 합산, 기타법인 제외로 거래대금은 소폭 과소추정 · 임계값은 아직 실측 검증 전 잠정치 — 수급 이력이 쌓이면 다른 지표와 같은 방식으로 구분력을 측정해 조정 예정</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">KOSDAQ 지수가 20일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://kr.tradingview.com/chart/?symbol=KRX%3A377450" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.naver.com/item/main.naver?code=377450" target="_blank" rel="noopener">네이버 금융</a>
+  </div>
+</article></div>
+  <details class="full-results">
+    <summary>전체 29종목 결과 보기 <a href="assets/2026-08-25/launchpad.csv" class="csv-link" onclick="event.stopPropagation()">CSV 다운로드</a></summary>
+    <div class="table-wrap"><table><thead><tr><th>종목</th><th>종가</th><th>정배열</th><th>거래량비</th><th>정배열 후</th></tr></thead><tbody><tr class="is-new"><td>CJ CGV <span class="ticker-sm">(079160)</span></td><td>5,230</td><td>1일차</td><td>0.5x</td><td>+0.0%</td></tr><tr class="is-new"><td>HMM <span class="ticker-sm">(011200)</span></td><td>22,650</td><td>1일차</td><td>1.2x</td><td>+0.0%</td></tr><tr><td>KBI메탈 <span class="ticker-sm">(024840)</span></td><td>5,300</td><td>7일차</td><td>0.2x</td><td>-7.8%</td></tr><tr><td>KISCO홀딩스 <span class="ticker-sm">(001940)</span></td><td>28,250</td><td>6일차</td><td>2.8x</td><td>+2.0%</td></tr><tr><td>KPX홀딩스 <span class="ticker-sm">(092230)</span></td><td>102,500</td><td>6일차</td><td>3.0x</td><td>+4.4%</td></tr><tr><td>LG <span class="ticker-sm">(003550)</span></td><td>112,600</td><td>5일차</td><td>0.6x</td><td>+2.2%</td></tr><tr><td>LG생활건강 <span class="ticker-sm">(051900)</span></td><td>316,000</td><td>9일차</td><td>0.7x</td><td>+0.6%</td></tr><tr><td>NHN <span class="ticker-sm">(181710)</span></td><td>66,000</td><td>9일차</td><td>1.0x</td><td>+7.7%</td></tr><tr class="is-new"><td>국도화학 <span class="ticker-sm">(007690)</span></td><td>38,350</td><td>1일차</td><td>0.7x</td><td>+0.0%</td></tr><tr><td>국보디자인 <span class="ticker-sm">(066620)</span></td><td>24,950</td><td>2일차</td><td>0.8x</td><td>-1.6%</td></tr><tr><td>금호타이어 <span class="ticker-sm">(073240)</span></td><td>7,000</td><td>7일차</td><td>0.3x</td><td>-14.0%</td></tr><tr><td>네오팜 <span class="ticker-sm">(092730)</span></td><td>23,700</td><td>10일차</td><td>0.4x</td><td>-6.9%</td></tr><tr class="is-new"><td>리파인 <span class="ticker-sm">(377450)</span></td><td>16,740</td><td>1일차</td><td>1.0x</td><td>+0.0%</td></tr><tr><td>메가터치 <span class="ticker-sm">(446540)</span></td><td>7,240</td><td>9일차</td><td>1.0x</td><td>-10.1%</td></tr><tr><td>메리츠금융지주 <span class="ticker-sm">(138040)</span></td><td>120,800</td><td>6일차</td><td>1.0x</td><td>+3.1%</td></tr><tr><td>미스토홀딩스 <span class="ticker-sm">(081660)</span></td><td>41,800</td><td>9일차</td><td>0.7x</td><td>-2.6%</td></tr><tr><td>삼성E&amp;A <span class="ticker-sm">(028050)</span></td><td>45,850</td><td>6일차</td><td>0.6x</td><td>-4.3%</td></tr><tr><td>삼성에스디에스 <span class="ticker-sm">(018260)</span></td><td>227,000</td><td>8일차</td><td>0.5x</td><td>-4.2%</td></tr><tr class="is-new"><td>샘씨엔에스 <span class="ticker-sm">(252990)</span></td><td>12,790</td><td>1일차</td><td>0.8x</td><td>+0.0%</td></tr><tr><td>서흥 <span class="ticker-sm">(008490)</span></td><td>22,600</td><td>7일차</td><td>0.3x</td><td>-9.1%</td></tr><tr><td>슈프리마 <span class="ticker-sm">(236200)</span></td><td>56,200</td><td>5일차</td><td>0.8x</td><td>-2.9%</td></tr><tr><td>씨젠 <span class="ticker-sm">(096530)</span></td><td>31,450</td><td>6일차</td><td>0.8x</td><td>+3.8%</td></tr><tr class="is-new"><td>아스플로 <span class="ticker-sm">(159010)</span></td><td>21,100</td><td>1일차</td><td>1.4x</td><td>+0.0%</td></tr><tr class="is-new"><td>아이마켓코리아 <span class="ticker-sm">(122900)</span></td><td>8,350</td><td>1일차</td><td>5.2x</td><td>+0.0%</td></tr><tr><td>에이플러스에셋 <span class="ticker-sm">(244920)</span></td><td>13,310</td><td>5일차</td><td>0.9x</td><td>+0.3%</td></tr><tr><td>지엔씨에너지 <span class="ticker-sm">(119850)</span></td><td>50,900</td><td>5일차</td><td>0.5x</td><td>-7.3%</td></tr><tr class="is-new"><td>코스맥스 <span class="ticker-sm">(192820)</span></td><td>289,000</td><td>1일차</td><td>0.8x</td><td>+0.0%</td></tr><tr><td>코스메카코리아 <span class="ticker-sm">(241710)</span></td><td>139,500</td><td>8일차</td><td>0.8x</td><td>+12.0%</td></tr><tr><td>펌텍코리아 <span class="ticker-sm">(251970)</span></td><td>63,000</td><td>3일차</td><td>1.1x</td><td>+5.4%</td></tr></tbody></table></div><p class="legend">■ 굵은 줄 = 오늘 카드로 표시된 종목(신규·재포착)</p>
+  </details>
+</section><section class="scanner-section" id="newhigh">
+  <h2>52주 신고가 돌파 <span class="count">신규 5건 · 전체 6종목</span></h2>
+  <div class="cards"><article class="card">
+  <header class="card-head">
+    <h3>현대해상 <span class="ticker">(001450)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">KOSPI</span>
+  </header>
+  <div class="industry">보험업</div>
+  <div class="industry-stat">업종 참고: RS 평균 64/99(업종 중 상위 7%) · 오늘 신호 1건 · 코스피 대비 +6.1%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): 보험업 (현대해상·신한지주 등 20종목)<br>섹터 내 RS 순위: 1/20위 (RS 94/99)<br>섹터 1~3위: 현대해상(94), 신한지주(73), 동양생명(72)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 50,800 · 거래대금 136억</div>
+  <div class="chips"><span class="chip">고점대비 +0.0%</span><span class="chip">6개월 +44.7%</span><span class="chip">갱신 3회</span><span class="chip">거래량비 0.4x</span></div>
+  <div class="plan">손절 47,244 | 목표 61,468 | 수량 196주</div>
+  <img class="chart" src="assets/2026-08-25/001450.png" alt="현대해상 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2026 반기보고서(누적) · 순이익 흑자전환(+nan억원→+4,183억원) · EPS 흑자전환(+nan원→+5,288원) · 매출 흑자전환(+nan억원→+8,444억원)</div><div class="fnote">DART 공시 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2025 사업보고서(연간) · 순이익 +19.9% · EPS +19.9% · 매출 +2.2%</div><div class="fnote">DART 공시 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict good">우수</span></div><div class="fval">고점대비 +0.0% · 최근 20일 중 3회 갱신 · 6개월 모멘텀 +44.7%</div></div></div><div class="factor-row"><span class="badge poor">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict poor">미흡</span></div><div class="fval">20일 평균 대비 0.39배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge good">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict good">우수</span></div><div class="fval">RS 등급 94/99 (유니버스 1951종목 중 백분위) · 지수대비 +39.9%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge good">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict good">우수</span></div><div class="fval">20일 순매수 +14.90% (거래대금 대비) · 최근절반 +19.76% vs 이전절반 +6.94% (개선) · 순매수 15일 · 누적 +885.1억원</div><div class="fnote">한국투자증권 공식 API(KIS) 기준 · 기관+외국인 합산, 기타법인 제외로 거래대금은 소폭 과소추정 · 임계값은 아직 실측 검증 전 잠정치 — 수급 이력이 쌓이면 다른 지표와 같은 방식으로 구분력을 측정해 조정 예정</div></div></div><div class="factor-row"><span class="badge poor">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict poor">미흡</span></div><div class="fval">KOSPI 지수가 60일선 아래</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://kr.tradingview.com/chart/?symbol=KRX%3A001450" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.naver.com/item/main.naver?code=001450" target="_blank" rel="noopener">네이버 금융</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>GS <span class="ticker">(078930)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">KOSPI</span>
+  </header>
+  <div class="industry">기타 금융업</div>
+  <div class="industry-stat">업종 참고: RS 평균 40/99(업종 중 상위 51%) · 오늘 신호 3건 · 코스피 대비 -19.7%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): 기초 화학물질 제조업 (GS·롯데정밀화학 등 12종목)<br>섹터 내 RS 순위: 1/12위 (RS 96/99)<br>섹터 1~3위: GS(96), 롯데정밀화학(44), 한일시멘트(41)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 121,800 · 거래대금 748억</div>
+  <div class="chips"><span class="chip">고점대비 +0.3%</span><span class="chip">6개월 +66.4%</span><span class="chip">갱신 4회</span><span class="chip">거래량비 1.1x</span></div>
+  <div class="plan">손절 113,274 | 목표 147,378 | 수량 82주</div>
+  <img class="chart" src="assets/2026-08-25/078930.png" alt="GS 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2026 반기보고서(누적) · 순이익 흑자전환(+nan억원→+11,320억원) · EPS 흑자전환(+nan원→+11,172원)</div><div class="fnote">DART 공시 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge poor">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict poor">미흡</span></div><div class="fval">2025 사업보고서(연간) · 순이익 +20.2% · EPS +40.9% · 매출 -0.3%</div><div class="fnote">DART 공시 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict good">우수</span></div><div class="fval">고점대비 +0.3% · 최근 20일 중 4회 갱신 · 6개월 모멘텀 +66.4%</div></div></div><div class="factor-row"><span class="badge good">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict good">양호</span></div><div class="fval">20일 평균 대비 1.08배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge good">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict good">우수</span></div><div class="fval">RS 등급 96/99 (유니버스 1951종목 중 백분위) · 지수대비 +69.3%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge fair">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict fair">보통</span></div><div class="fval">20일 순매수 +1.82% (거래대금 대비) · 최근절반 +0.83% vs 이전절반 +3.24% (약화) · 순매수 12일 · 누적 +215.3억원</div><div class="fnote">한국투자증권 공식 API(KIS) 기준 · 기관+외국인 합산, 기타법인 제외로 거래대금은 소폭 과소추정 · 임계값은 아직 실측 검증 전 잠정치 — 수급 이력이 쌓이면 다른 지표와 같은 방식으로 구분력을 측정해 조정 예정 · 최근 유입이 이전보다 약해져 한 단계 낮춤</div></div></div><div class="factor-row"><span class="badge poor">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict poor">미흡</span></div><div class="fval">KOSPI 지수가 60일선 아래</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://kr.tradingview.com/chart/?symbol=KRX%3A078930" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.naver.com/item/main.naver?code=078930" target="_blank" rel="noopener">네이버 금융</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>KPX홀딩스 <span class="ticker">(092230)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">KOSPI</span>
+  </header>
+  <div class="industry">기초 화학물질 제조업</div>
+  <div class="industry-stat">업종 참고: RS 평균 37/99(업종 중 상위 60%) · 오늘 신호 3건 · 코스피 대비 -25.5%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): 부동산 임대 및 공급업 (Chemed Corp.·KPX홀딩스 등 30종목)<br>섹터 내 RS 순위: 2/30위 (RS 86/99)<br>섹터 1~3위: Chemed Corp.(89), KPX홀딩스(86), 코람코더원리츠(83)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 102,500 · 거래대금 12억</div>
+  <div class="chips"><span class="chip">고점대비 +4.4%</span><span class="chip">6개월 +21.7%</span><span class="chip">갱신 3회</span><span class="chip">거래량비 3.0x</span></div>
+  <div class="plan">손절 95,325 | 목표 124,025 | 수량 97주</div>
+  <img class="chart" src="assets/2026-08-25/092230.png" alt="KPX홀딩스 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2026 반기보고서(누적) · 순이익 흑자전환(+nan억원→+678억원) · EPS 흑자전환(+nan원→+54,216원) · 매출 흑자전환(+nan억원→+3,615억원)</div><div class="fnote">DART 공시 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge poor">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict poor">미흡</span></div><div class="fval">2025 사업보고서(연간) · 순이익 -1.7% · EPS +1.7% · 매출 -4.9%</div><div class="fnote">DART 공시 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict good">우수</span></div><div class="fval">고점대비 +4.4% · 최근 20일 중 3회 갱신 · 6개월 모멘텀 +21.7%</div></div></div><div class="factor-row"><span class="badge good">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict good">우수</span></div><div class="fval">20일 평균 대비 3.01배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge good">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict good">우수</span></div><div class="fval">RS 등급 86/99 (유니버스 1951종목 중 백분위) · 지수대비 +15.8%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge fair">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict fair">보통</span></div><div class="fval">20일 순매수 +2.24% (거래대금 대비) · 최근절반 +0.41% vs 이전절반 +6.57% (약화) · 순매수 12일 · 누적 +1.8억원</div><div class="fnote">한국투자증권 공식 API(KIS) 기준 · 기관+외국인 합산, 기타법인 제외로 거래대금은 소폭 과소추정 · 임계값은 아직 실측 검증 전 잠정치 — 수급 이력이 쌓이면 다른 지표와 같은 방식으로 구분력을 측정해 조정 예정 · 최근 유입이 이전보다 약해져 한 단계 낮춤</div></div></div><div class="factor-row"><span class="badge poor">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict poor">미흡</span></div><div class="fval">KOSPI 지수가 60일선 아래</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://kr.tradingview.com/chart/?symbol=KRX%3A092230" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.naver.com/item/main.naver?code=092230" target="_blank" rel="noopener">네이버 금융</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>마이크로컨텍솔 <span class="ticker">(098120)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">KOSDAQ</span>
+  </header>
+  <div class="industry">전자부품 제조업</div>
+  <div class="industry-stat">업종 참고: RS 평균 42/99(업종 중 상위 45%) · 오늘 신호 2건 · 코스닥 대비 +28.4%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): 전자부품 제조업 (마이크로컨텍솔·오킨스전자 등 7종목)<br>섹터 내 RS 순위: 1/7위 (RS 92/99)<br>섹터 1~3위: 마이크로컨텍솔(92), 오킨스전자(84), 한솔아이원스(37)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 43,550 · 거래대금 133억</div>
+  <div class="chips"><span class="chip">고점대비 +2.6%</span><span class="chip">6개월 +39.1%</span><span class="chip">갱신 2회</span><span class="chip">거래량비 1.4x</span></div>
+  <div class="plan">손절 40,502 | 목표 52,696 | 수량 229주</div>
+  <img class="chart" src="assets/2026-08-25/098120.png" alt="마이크로컨텍솔 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2026 반기보고서(누적) · 순이익 흑자전환(+nan억원→+115억원) · EPS 흑자전환(+nan원→+1,371원)</div><div class="fnote">DART 공시 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2025 사업보고서(연간) · 순이익 +58.9% · EPS +58.1% · 매출 +44.0%</div><div class="fnote">DART 공시 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict good">우수</span></div><div class="fval">고점대비 +2.6% · 최근 20일 중 2회 갱신 · 6개월 모멘텀 +39.1%</div></div></div><div class="factor-row"><span class="badge good">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict good">양호</span></div><div class="fval">20일 평균 대비 1.41배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge good">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict good">우수</span></div><div class="fval">RS 등급 92/99 (유니버스 1951종목 중 백분위) · 지수대비 +69.6%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge good">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict good">우수</span></div><div class="fval">20일 순매수 +8.36% (거래대금 대비) · 최근절반 +9.64% vs 이전절반 -5.27% (개선) · 순매수 9일 · 누적 +137.2억원</div><div class="fnote">한국투자증권 공식 API(KIS) 기준 · 기관+외국인 합산, 기타법인 제외로 거래대금은 소폭 과소추정 · 임계값은 아직 실측 검증 전 잠정치 — 수급 이력이 쌓이면 다른 지표와 같은 방식으로 구분력을 측정해 조정 예정</div></div></div><div class="factor-row"><span class="badge good">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict good">양호</span></div><div class="fval">KOSDAQ 지수가 20일선 위</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://kr.tradingview.com/chart/?symbol=KRX%3A098120" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.naver.com/item/main.naver?code=098120" target="_blank" rel="noopener">네이버 금융</a>
+  </div>
+</article><article class="card">
+  <header class="card-head">
+    <h3>한국콜마 <span class="ticker">(161890)</span></h3>
+    <span class="capture new">신규</span>
+    <span class="market">KOSPI</span>
+  </header>
+  <div class="industry">기타 화학제품 제조업</div>
+  <div class="industry-stat">업종 참고: RS 평균 46/99(업종 중 상위 37%) · 오늘 신호 7건 · 코스피 대비 -13.2%p(126일)</div>
+  <div class="sector-info">🧪 자체 섹터 분류(실험적, 참고용): 기타 화학제품 제조업 (한국콜마·코스메카코리아 등 5종목)<br>섹터 내 RS 순위: 1/5위 (RS 97/99)<br>섹터 1~3위: 한국콜마(97), 코스메카코리아(95), 코스맥스(94)<br><span class="sector-caveat">※ 자체 상관관계 계산 — 검증 시 기준업종 11개 중 8개 정확, 시간에 따라 자주 바뀔 수 있음(3개월 안정성 실측 낮음)</span></div>
+  <div class="stats">종가 150,000 · 거래대금 706억</div>
+  <div class="chips"><span class="chip">고점대비 +4.2%</span><span class="chip">6개월 +103.5%</span><span class="chip">갱신 2회</span><span class="chip">거래량비 1.0x</span></div>
+  <div class="plan">손절 139,500 | 목표 181,500 | 수량 66주</div>
+  <img class="chart" src="assets/2026-08-25/161890.png" alt="한국콜마 차트" loading="lazy">
+  
+  <div class="factors"><div class="factor-row"><span class="badge good">C</span><div class="factor-body"><div class="factor-head">C — 분기 실적 성장 <span class="verdict good">우수</span></div><div class="fval">2026 반기보고서(누적) · 순이익 흑자전환(+nan억원→+706억원) · EPS 흑자전환(+nan원→+2,661원)</div><div class="fnote">DART 공시 기준 · 분기 단독 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">A</span><div class="factor-body"><div class="factor-head">A — 연간 실적 성장 <span class="verdict good">양호</span></div><div class="fval">2025 사업보고서(연간) · 순이익 +34.2% · EPS +38.4% · 매출 +11.0%</div><div class="fnote">DART 공시 기준 · 연간 전년동기 대비</div></div></div><div class="factor-row"><span class="badge good">N</span><div class="factor-body"><div class="factor-head">N — 신고가·모멘텀 <span class="verdict good">우수</span></div><div class="fval">고점대비 +4.2% · 최근 20일 중 2회 갱신 · 6개월 모멘텀 +103.5%</div></div></div><div class="factor-row"><span class="badge good">S</span><div class="factor-body"><div class="factor-head">S — 수급(거래량) <span class="verdict good">양호</span></div><div class="fval">20일 평균 대비 1.01배</div><div class="fnote">유통주식수·순매수 데이터는 미보유 (거래량으로만 근사)</div></div></div><div class="factor-row"><span class="badge good">L</span><div class="factor-body"><div class="factor-head">L — 주도주(상대강도) <span class="verdict good">우수</span></div><div class="fval">RS 등급 97/99 (유니버스 1951종목 중 백분위) · 지수대비 +88.6%p (126일)</div><div class="fnote">상위 시가총액 유니버스 기준 — KRX 전체 대비 백분위 아님</div></div></div><div class="factor-row"><span class="badge good">I</span><div class="factor-body"><div class="factor-head">I — 기관·외국인 수급 <span class="verdict good">우수</span></div><div class="fval">20일 순매수 +4.78% (거래대금 대비) · 최근절반 +5.25% vs 이전절반 +3.03% (개선) · 순매수 16일 · 누적 +569.4억원</div><div class="fnote">한국투자증권 공식 API(KIS) 기준 · 기관+외국인 합산, 기타법인 제외로 거래대금은 소폭 과소추정 · 임계값은 아직 실측 검증 전 잠정치 — 수급 이력이 쌓이면 다른 지표와 같은 방식으로 구분력을 측정해 조정 예정</div></div></div><div class="factor-row"><span class="badge poor">M</span><div class="factor-body"><div class="factor-head">M — 시장방향 <span class="verdict poor">미흡</span></div><div class="fval">KOSPI 지수가 60일선 아래</div><div class="fnote">실제 매매 필터로는 미적용(표시 전용) — 종목 선별보다 지수 자체 타이밍이 더 효율적이라는 자체 검증 결과 있음 (reports/vs_kospi.md)</div></div></div></div>
+  <div class="links">
+    <a href="https://kr.tradingview.com/chart/?symbol=KRX%3A161890" target="_blank" rel="noopener">트레이딩뷰</a>
+    <a href="https://finance.naver.com/item/main.naver?code=161890" target="_blank" rel="noopener">네이버 금융</a>
+  </div>
+</article></div>
+  <details class="full-results">
+    <summary>전체 6종목 결과 보기 <a href="assets/2026-08-25/newhigh.csv" class="csv-link" onclick="event.stopPropagation()">CSV 다운로드</a></summary>
+    <div class="table-wrap"><table><thead><tr><th>종목</th><th>종가</th><th>고점대비</th><th>6개월</th><th>갱신</th><th>거래량비</th></tr></thead><tbody><tr class="is-new"><td>GS <span class="ticker-sm">(078930)</span></td><td>121,800</td><td>+0.3%</td><td>+66.4%</td><td>4회</td><td>1.1x</td></tr><tr class="is-new"><td>KPX홀딩스 <span class="ticker-sm">(092230)</span></td><td>102,500</td><td>+4.4%</td><td>+21.7%</td><td>3회</td><td>3.0x</td></tr><tr class="is-new"><td>마이크로컨텍솔 <span class="ticker-sm">(098120)</span></td><td>43,550</td><td>+2.6%</td><td>+39.1%</td><td>2회</td><td>1.4x</td></tr><tr><td>코스맥스 <span class="ticker-sm">(192820)</span></td><td>289,000</td><td>+0.3%</td><td>+44.5%</td><td>3회</td><td>0.8x</td></tr><tr class="is-new"><td>한국콜마 <span class="ticker-sm">(161890)</span></td><td>150,000</td><td>+4.2%</td><td>+103.5%</td><td>2회</td><td>1.0x</td></tr><tr class="is-new"><td>현대해상 <span class="ticker-sm">(001450)</span></td><td>50,800</td><td>+0.0%</td><td>+44.7%</td><td>3회</td><td>0.4x</td></tr></tbody></table></div><p class="legend">■ 굵은 줄 = 오늘 카드로 표시된 종목(신규·재포착)</p>
+  </details>
+</section>
+  
+<div class="disclaimer">
+  ⚠️ <b>후보를 좁히는 용도이지 매수 근거가 아닙니다.</b><br>
+  · 위 팩터 중 성공/실패를 구분하는 것은 아직 확인되지 않았습니다
+  (오닐의 +25% 성장 기준은 측정 12칸 중 9칸이 마이너스).<br>
+  · 이 신호로 5슬롯 백테스트 시 코스피가 연 3.3%였던 9년과 +159%였던 최근 2년
+  <b>양쪽 모두 절대 손실</b>이었습니다.<br>
+  · 거래대금은 승률 예측용이 아니라 체결 가능성 판단용입니다 — 오히려 거래대금이
+  큰 종목을 고르면 승률은 떨어집니다(실측 −2.6%p).<br>
+  · 검증 내역: 저장소의 <code>docs/FINDINGS.md</code>
+</div>
+
+  <footer>자동 생성 · <a href="index.html">지난 리포트 목록</a></footer>
+</div>
+</body>
+</html>
