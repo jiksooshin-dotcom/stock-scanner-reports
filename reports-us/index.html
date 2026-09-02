@@ -24,6 +24,15 @@ header.page-head h1{margin:0 0 4px;font-size:1.4rem}
 .jump{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
 .jump a{background:var(--panel);border:1px solid var(--border);border-radius:8px;
 padding:6px 12px;color:var(--text);text-decoration:none;font-size:.85rem}
+/* 전략 탭 — 선택된 것만 강조해 "지금 무엇을 보고 있는지"가 항상 드러나게 한다 */
+button.tab{background:var(--panel);border:1px solid var(--border);border-radius:8px;
+padding:6px 12px;color:var(--text);font-size:.85rem;font-family:inherit;cursor:pointer}
+button.tab.is-active{background:var(--accent);border-color:var(--accent);color:#fff;
+font-weight:600}
+/* 숨김은 JS가 붙었을 때만 — 스크립트가 막히면 예전처럼 전부 보인다 */
+.js-tabs section.scanner-section{display:none}
+.js-tabs section.scanner-section.is-shown{display:block}
+@media print{.js-tabs section.scanner-section{display:block}}
 section.scanner-section{margin:24px 0}
 section.scanner-section h2{font-size:1.1rem;display:flex;align-items:baseline;gap:8px;
 flex-wrap:wrap;border-bottom:2px solid var(--border);padding-bottom:8px}
@@ -34,6 +43,7 @@ flex-wrap:wrap;border-bottom:2px solid var(--border);padding-bottom:8px}
 .card-head h3{margin:0;font-size:1.05rem}
 .ticker{color:var(--muted);font-weight:normal;font-size:.85rem}
 .ticker-sm{color:var(--muted);font-size:.8rem}
+.industry-cell{color:var(--muted);font-size:.78rem}
 .market{font-size:.75rem;color:var(--muted);border:1px solid var(--border);
 border-radius:6px;padding:1px 6px;white-space:nowrap}
 .capture{font-size:.72rem;font-weight:600;border-radius:6px;padding:1px 6px;white-space:nowrap}
@@ -51,6 +61,9 @@ padding:3px 8px;font-size:.78rem}
 .plan{margin-top:10px;background:var(--bg);border-radius:8px;padding:8px 10px;
 font-size:.85rem;border:1px dashed var(--border)}
 img.chart{width:100%;border-radius:8px;margin-top:10px;display:block}
+/* 카드에서는 폭에 맞춰 줄어 보이지만 원본은 그 2배 해상도라, 클릭해 새 탭에서
+   열면 봉 하나하나를 확인할 수 있다(돌파 시점 확인용). */
+a.chart-link{display:block;cursor:zoom-in}
 .pattern-label{font-size:.75rem;color:var(--muted);margin-top:4px;font-style:italic}
 .factors{margin-top:10px;display:flex;flex-direction:column;gap:6px}
 .factor-row{display:flex;gap:8px;align-items:flex-start}
@@ -103,7 +116,7 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:16px 0 32px
 <body>
 <div class="wrap">
   <header class="page-head"><h1>스캔 리포트 목록</h1></header>
-  <ul style="list-style:none;padding:0"><li><a href="2026-08-28.html">2026-08-28</a></li><li><a href="2026-08-27.html">2026-08-27</a></li><li><a href="2026-08-26.html">2026-08-26</a></li><li><a href="2026-08-21.html">2026-08-21</a></li><li><a href="2026-08-20.html">2026-08-20</a></li></ul>
+  <ul style="list-style:none;padding:0"><li><a href="2026-09-01.html">2026-09-01</a></li><li><a href="2026-08-28.html">2026-08-28</a></li><li><a href="2026-08-27.html">2026-08-27</a></li><li><a href="2026-08-26.html">2026-08-26</a></li><li><a href="2026-08-21.html">2026-08-21</a></li><li><a href="2026-08-20.html">2026-08-20</a></li></ul>
 </div>
 </body>
 </html>
