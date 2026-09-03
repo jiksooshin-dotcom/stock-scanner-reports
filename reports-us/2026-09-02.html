@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>스캔 리포트 목록</title>
+<title>2026-09-02 스캔 리포트</title>
 <style>
 :root{--bg:#f7f7f8;--panel:#fff;--text:#1a1a1a;--muted:#6b7280;--border:#e5e7eb;
 --accent:#2563eb;--good:#16a34a;--good-bg:#dcfce7;--fair:#ca8a04;--fair-bg:#fef9c3;
@@ -115,8 +115,87 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:16px 0 32px
 </head>
 <body>
 <div class="wrap">
-  <header class="page-head"><h1>스캔 리포트 목록</h1></header>
-  <ul style="list-style:none;padding:0"><li><a href="2026-09-02.html">2026-09-02</a></li><li><a href="2026-09-01.html">2026-09-01</a></li><li><a href="2026-08-28.html">2026-08-28</a></li><li><a href="2026-08-27.html">2026-08-27</a></li><li><a href="2026-08-26.html">2026-08-26</a></li><li><a href="2026-08-21.html">2026-08-21</a></li><li><a href="2026-08-20.html">2026-08-20</a></li></ul>
+  <header class="page-head">
+    <h1>2026-09-02 스캔 리포트</h1>
+    <div class="subtitle">주식 스크리너 · 매일 자동 생성</div>
+    <nav class="jump" role="tablist"><button class="tab is-active" data-tab="all" role="tab" aria-selected="true">전체</button><button class="tab" data-tab="launchpad" role="tab" aria-selected="false">Launch Pad 스캐너 (0)</button><button class="tab" data-tab="newhigh" role="tab" aria-selected="false">52주 신고가 돌파 (0)</button></nav>
+  </header>
+  <section class="scanner-section" id="launchpad" data-section="launchpad"><h2>Launch Pad 스캐너</h2><p class="error">⚠️ 실행 실패: HTTPSConnectionPool(host=&#x27;openapi.koreainvestment.com&#x27;, port=9443): Max retries exceeded with url: /oauth2/tokenP (Caused by ConnectTimeoutError(&lt;HTTPSConnection(host=&#x27;openapi.koreainvestment.com&#x27;, port=9443) at 0x7fb1af342720&gt;, &#x27;Connection to openapi.koreainvestment.com timed out. (connect timeout=15)&#x27;))</p></section><section class="scanner-section" id="newhigh" data-section="newhigh"><h2>52주 신고가 돌파</h2><p class="error">⚠️ 실행 실패: HTTPSConnectionPool(host=&#x27;openapi.koreainvestment.com&#x27;, port=9443): Max retries exceeded with url: /oauth2/tokenP (Caused by ConnectTimeoutError(&lt;HTTPSConnection(host=&#x27;openapi.koreainvestment.com&#x27;, port=9443) at 0x7fb1af3be8d0&gt;, &#x27;Connection to openapi.koreainvestment.com timed out. (connect timeout=15)&#x27;))</p></section>
+  
+  
+<div class="disclaimer">
+  ⚠️ <b>후보를 좁히는 용도이지 매수 근거가 아닙니다.</b><br>
+  · 위 팩터 중 성공/실패를 구분하는 것은 아직 확인되지 않았습니다
+  (오닐의 +25% 성장 기준은 측정 12칸 중 9칸이 마이너스).<br>
+  · 이 신호로 5슬롯 백테스트 시 코스피가 연 3.3%였던 9년과 +159%였던 최근 2년
+  <b>양쪽 모두 절대 손실</b>이었습니다.<br>
+  · 거래대금은 승률 예측용이 아니라 체결 가능성 판단용입니다 — 오히려 거래대금이
+  큰 종목을 고르면 승률은 떨어집니다(실측 −2.6%p).<br>
+  · 검증 내역: 저장소의 <code>docs/FINDINGS.md</code>
 </div>
+
+<div class="disclaimer">
+  📐 <b>"업종 참고"의 종목별 편차(±%p)를 읽는 법</b><br>
+  업종 평균 옆의 편차는 <b>그 업종 안에서 종목들의 수익률이 얼마나 흩어져 있는지</b>를
+  나타냅니다(표준편차). 대략 종목 셋 중 둘은 "평균 ± 편차" 범위 안에 들어옵니다.<br>
+  · <b>편차가 작으면</b>(±15%p 이하) 업종이 한 덩어리로 움직인다는 뜻이라, 업종 평균을
+  그 종목의 배경으로 참고할 만합니다.<br>
+  · <b>편차가 크면</b>(±40%p 이상) 같은 업종이라도 종목마다 제각각이라는 뜻이라,
+  <b>업종 평균은 이 종목에 대해 사실상 아무것도 말해주지 않습니다.</b><br>
+  · 실측(2026-08-27, 한국): 금융사끼리는 ±12%p로 촘촘한 반면 반도체 제조업은
+  ±70%p였습니다. 후자는 평균이 +16%인데 개별 종목은 −54%~+86%로 벌어집니다.<br>
+  · 편차가 큰 이유는 두 가지입니다 — 분류가 사업 성격과 어긋나거나(지주회사가
+  표준산업분류상 "기타 금융업"에 묶입니다), 분류는 맞는데 종목별 성과 차이가
+  원래 큰 경우입니다.
+</div>
+
+<div class="disclaimer">
+  🔎 <b>"종목분석" 버튼</b><br>
+  카드의 <b>종목분석</b>을 누르면 설치된 Claude 앱이 열리면서 그 종목에 대한 질문이
+  미리 채워집니다. <b>전송은 직접 눌러야 합니다</b> — 보내기 전에 질문을 고쳐도 됩니다.
+  앱이 열리지 않는 환경(폰 등)에서는 옆의 작은 <b>웹</b> 링크를 쓰세요.<br>
+  · 답변은 Claude가 웹에서 찾아 정리한 내용입니다. <b>수치·뉴스는 원문을 직접
+  확인</b>하고 판단하세요 — 검색 결과가 오래됐거나 잘못됐을 수 있습니다.<br>
+  · 이 버튼은 회사가 무엇을 하는 곳인지 파악하기 위한 것이지 매수 근거가 아닙니다.
+</div>
+
+  <footer>자동 생성 · <a href="index.html">지난 리포트 목록</a></footer>
+</div>
+<script>
+(function () {
+  var tabs = document.querySelectorAll('[data-tab]');
+  var secs = document.querySelectorAll('[data-section]');
+  if (tabs.length < 2 || !secs.length) return;
+  document.body.classList.add('js-tabs');
+
+  function show(id) {
+    var known = false;
+    tabs.forEach(function (t) {
+      var on = t.dataset.tab === id;
+      if (on) known = true;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    if (!known) return false;
+    secs.forEach(function (s) {
+      s.classList.toggle('is-shown', id === 'all' || s.dataset.section === id);
+    });
+    return true;
+  }
+
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () {
+      if (show(t.dataset.tab)) {
+        // 해시만 갈아끼운다 — location.hash에 직접 넣으면 그 위치로 스크롤이 튄다
+        history.replaceState(null, '', '#' + t.dataset.tab);
+      }
+    });
+  });
+
+  // 텔레그램의 "…html#weinstein" 링크로 들어오면 그 전략이 열린 채로 시작한다
+  var initial = (location.hash || '').replace('#', '');
+  if (!show(initial)) show('all');
+})();
+</script>
 </body>
 </html>
