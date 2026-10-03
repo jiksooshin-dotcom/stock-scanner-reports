@@ -176,12 +176,12 @@ footer{color:var(--muted);font-size:.78rem;text-align:center;padding:16px 0 32px
     <nav class="jump" role="tablist"><button class="tab is-active" data-tab="all" role="tab" aria-selected="true">전체</button><button class="tab" data-tab="weinstein" role="tab" aria-selected="false">와인스타인 스캐너 (2)</button><button class="tab" data-tab="launchpad" role="tab" aria-selected="false">Launch Pad 스캐너 (3)</button><button class="tab" data-tab="newhigh" role="tab" aria-selected="false">52주 신고가 돌파 (7)</button></nav>
   </header>
   <section class="scanner-section" id="weinstein" data-section="weinstein">
-  <h2>와인스타인 스캐너 <span class="count">신규 1건 · 재포착 1건 · 전체 2종목</span></h2>
+  <h2>와인스타인 스캐너 <span class="count">신규 2건 · 전체 2종목</span></h2>
   <div class="entry-rules"><div class="entry-head">이 전략의 진입 조건</div><ul><li><b>30주선 크로스오버</b> — 주봉 종가가 30주 이동평균을 <b>그 주에 처음</b> 넘을 것(직전 주까지는 아래에 있어야 하며, 이미 위에 있던 종목은 신호가 아닙니다)</li><li><b>거래량 급증</b> — 그 주의 <b>최고 일별</b> 거래량이 직전 20거래일 평균의 <b>2배 이상</b>일 것 (원서 조건 그대로: "일주일 동안의 최고 거래량이 지난달 평균 거래량보다 최소 2배")</li><li><b>맨스필드 RS ≥ 0</b> — 지수 대비 상대강도가 자기 52주 이동평균 위에 있을 것 (코스피 종목은 코스피, 코스닥은 코스닥, 미국은 S&P500 기준)</li></ul><details class="entry-detail"><summary>자세히 — 한계와 주의사항</summary><p>세 조건을 <b>모두</b> 만족해야 신호가 납니다. 순위는 거래량 배수 내림차순이고 상위 30종목만 표시합니다.</p><p><b>RS 게이트에는 예외가 있습니다.</b> RS를 계산할 수 없으면(상장 후 52주 미만 등) 게이트를 걸지 않고 통과시킵니다 — 현재 신호의 약 6%입니다. 2026-09-06 이전에는 이 값이 35%였습니다(백테스트용 지수를 8년치만 받아와 앞 3~4년의 RS가 통째로 비어 있었습니다).</p><p><b>성과 수치를 근거로 삼지 마세요.</b> 진입 조건을 전혀 바꾸지 않고 백테스트 기간만 ±7% 흔들어도 10년 CAGR이 7.75%~21.88%로 움직입니다(폭 14.1%p). 조건을 바꿔서 얻는 차이(11.4%p)보다 큽니다. 지금 조합은 '최선이라서'가 아니라 '바꿀 근거가 없어서' 유지하는 것입니다 — reports/weinstein_entry_rules_decision_log.md §5⑫.</p><p>이미 기각된 방향: 베이스 저항선 돌파, 원서②(3~4주 누적 거래량), 30주선 비하락, 주간 총거래량 기준. 근거는 같은 문서 §4에 있습니다.</p></details></div>
   <div class="cards"><article class="card">
   <header class="card-head">
     <h3>시놉시스 <span class="ticker">(SNPS)</span></h3>
-    <span class="capture returning">35일전 포착</span>
+    <span class="capture new">신규</span>
     <span class="market">NASDAQ</span>
   </header>
   <div class="industry">Information Technology</div>
@@ -236,7 +236,7 @@ scanner: weinstein
     <div class="table-wrap"><table><thead><tr><th>종목</th><th>종가</th><th>거래량비</th><th>거래량조건</th><th>맨스필드RS</th><th>업종</th></tr></thead><tbody><tr class="is-new"><td>Synaptics <span class="ticker-sm">(SYNA)</span></td><td>$121.10</td><td>11.9x</td><td>—</td><td>+20.4</td><td class="industry-cell">Information Technology</td></tr><tr class="is-new"><td>시놉시스 <span class="ticker-sm">(SNPS)</span></td><td>$489.90</td><td>3.5x</td><td>—</td><td>+2.1</td><td class="industry-cell">Information Technology</td></tr></tbody></table></div><p class="legend">■ 굵은 줄 = 오늘 카드로 표시된 종목(신규·재포착)</p>
   </details>
 </section><section class="scanner-section" id="launchpad" data-section="launchpad">
-  <h2>Launch Pad 스캐너 <span class="count">신규 2건 · 재포착 1건 · 전체 24종목</span></h2>
+  <h2>Launch Pad 스캐너 <span class="count">신규 3건 · 전체 24종목</span></h2>
   <div class="entry-rules"><div class="entry-head">이 전략의 진입 조건</div><ul><li><b>SMA 정배열 성립</b> — 20일선 &gt; 50일선 &gt; 120일선 순서가 <b>오늘</b> 성립할 것</li><li><b>정배열이 최근에 시작</b> — 그 정배열이 시작된 지 10거래일 이내일 것 (이미 오래 정배열이던 종목은 제외 — '막 시작한 것'만 잡습니다)</li></ul><details class="entry-detail"><summary>자세히 — 한계와 주의사항</summary><p>이 두 조건이 게이트 전부입니다. 나머지(거래량·모멘텀)는 <b>순위를 매기는 점수</b>일 뿐 통과 여부를 가르지 않습니다.</p><p>점수 = 신선도 + 거래량배수 + 모멘텀
 · 신선도: 정배열이 시작된 지 얼마나 됐는지 (오늘 막 시작 = 1.0)
 · 거래량배수: 오늘 거래량 ÷ 최근 평균 거래량 (최대 3배)
@@ -244,7 +244,7 @@ scanner: weinstein
   <div class="cards"><article class="card">
   <header class="card-head">
     <h3>ASML 홀딩(ADR) <span class="ticker">(ASML)</span></h3>
-    <span class="capture returning">30일전 포착</span>
+    <span class="capture new">신규</span>
     <span class="market">NASDAQ</span>
   </header>
   <div class="industry">Information Technology</div>
@@ -325,7 +325,7 @@ scanner: launchpad
     <div class="table-wrap"><table><thead><tr><th>종목</th><th>종가</th><th>정배열</th><th>거래량비</th><th>정배열 후</th><th>업종</th></tr></thead><tbody><tr><td>AMD <span class="ticker-sm">(AMD)</span></td><td>$633.91</td><td>10일차</td><td>0.9x</td><td>+3.0%</td><td class="industry-cell">Information Technology</td></tr><tr class="is-new"><td>ASML 홀딩(ADR) <span class="ticker-sm">(ASML)</span></td><td>$1,867.31</td><td>1일차</td><td>1.0x</td><td>+0.0%</td><td class="industry-cell">Information Technology</td></tr><tr><td>AT&amp;T <span class="ticker-sm">(T)</span></td><td>$24.30</td><td>9일차</td><td>0.8x</td><td>-3.2%</td><td class="industry-cell">Communication Services</td></tr><tr><td>Arrow Electronics <span class="ticker-sm">(ARW)</span></td><td>$242.01</td><td>10일차</td><td>2.1x</td><td>+10.5%</td><td class="industry-cell">Information Technology</td></tr><tr><td>BP(ADR) <span class="ticker-sm">(BP)</span></td><td>$44.79</td><td>10일차</td><td>0.8x</td><td>+3.8%</td><td class="industry-cell">Energy</td></tr><tr><td>Bruker <span class="ticker-sm">(BRKR)</span></td><td>$63.24</td><td>6일차</td><td>1.0x</td><td>-1.5%</td><td class="industry-cell">Health Care</td></tr><tr><td>CME 그룹 <span class="ticker-sm">(CME)</span></td><td>$263.14</td><td>5일차</td><td>0.9x</td><td>-0.0%</td><td class="industry-cell">Financials</td></tr><tr><td>CommVault Systems <span class="ticker-sm">(CVLT)</span></td><td>$150.28</td><td>9일차</td><td>0.8x</td><td>+2.6%</td><td class="industry-cell">Information Technology</td></tr><tr><td>F5, Inc. <span class="ticker-sm">(FFIV)</span></td><td>$454.04</td><td>10일차</td><td>1.2x</td><td>+0.9%</td><td class="industry-cell">Information Technology</td></tr><tr><td>HCA Healthcare <span class="ticker-sm">(HCA)</span></td><td>$426.69</td><td>4일차</td><td>0.6x</td><td>-1.1%</td><td class="industry-cell">Health Care</td></tr><tr class="is-new"><td>MSC Industrial Direct <span class="ticker-sm">(MSM)</span></td><td>$130.12</td><td>1일차</td><td>1.1x</td><td>+0.0%</td><td class="industry-cell">Industrials</td></tr><tr><td>Mettler Toledo <span class="ticker-sm">(MTD)</span></td><td>$1,486.19</td><td>4일차</td><td>0.6x</td><td>-3.3%</td><td class="industry-cell">Health Care</td></tr><tr><td>Royal Gold <span class="ticker-sm">(RGLD)</span></td><td>$234.64</td><td>10일차</td><td>0.7x</td><td>-6.2%</td><td class="industry-cell">Materials</td></tr><tr><td>Viatris <span class="ticker-sm">(VTRS)</span></td><td>$17.60</td><td>5일차</td><td>0.8x</td><td>-3.7%</td><td class="industry-cell">Health Care</td></tr><tr><td>WESCO International <span class="ticker-sm">(WCC)</span></td><td>$381.73</td><td>6일차</td><td>1.0x</td><td>+3.9%</td><td class="industry-cell">Industrials</td></tr><tr><td>West Pharmaceutical Services <span class="ticker-sm">(WST)</span></td><td>$364.98</td><td>9일차</td><td>0.8x</td><td>-1.6%</td><td class="industry-cell">Health Care</td></tr><tr><td>루멘텀 홀딩스 <span class="ticker-sm">(LITE)</span></td><td>$1,085.42</td><td>2일차</td><td>1.0x</td><td>+3.8%</td><td class="industry-cell">Information Technology</td></tr><tr><td>메타 플랫폼스(페이스북) <span class="ticker-sm">(META)</span></td><td>$728.08</td><td>4일차</td><td>0.5x</td><td>-1.4%</td><td class="industry-cell">Communication Services</td></tr><tr><td>시게이트 테크놀로지 홀딩스 <span class="ticker-sm">(STX)</span></td><td>$848.99</td><td>5일차</td><td>3.6x</td><td>-7.9%</td><td class="industry-cell">Information Technology</td></tr><tr><td>아스테라 랩스 <span class="ticker-sm">(ALAB)</span></td><td>$350.33</td><td>5일차</td><td>1.0x</td><td>-0.3%</td><td class="industry-cell">Information Technology</td></tr><tr><td>암페놀 <span class="ticker-sm">(APH)</span></td><td>$86.96</td><td>10일차</td><td>0.7x</td><td>+7.7%</td><td class="industry-cell">Information Technology</td></tr><tr><td>액센추어 <span class="ticker-sm">(ACN)</span></td><td>$198.90</td><td>10일차</td><td>1.5x</td><td>+6.9%</td><td class="industry-cell">Information Technology</td></tr><tr class="is-new"><td>이턴 코퍼레이션 <span class="ticker-sm">(ETN)</span></td><td>$436.11</td><td>1일차</td><td>1.0x</td><td>+0.0%</td><td class="industry-cell">Industrials</td></tr><tr><td>토탈에네르지(ADR) <span class="ticker-sm">(TTE)</span></td><td>$84.40</td><td>10일차</td><td>1.5x</td><td>-6.3%</td><td class="industry-cell">Energy</td></tr></tbody></table></div><p class="legend">■ 굵은 줄 = 오늘 카드로 표시된 종목(신규·재포착)</p>
   </details>
 </section><section class="scanner-section" id="newhigh" data-section="newhigh">
-  <h2>52주 신고가 돌파 <span class="count">신규 3건 · 재포착 4건 · 전체 8종목</span></h2>
+  <h2>52주 신고가 돌파 <span class="count">신규 7건 · 전체 8종목</span></h2>
   <div class="entry-rules"><div class="entry-head">이 전략의 진입 조건</div><ul><li><b>52주 신고가 근접·돌파</b> — 종가가 최근 252거래일(≈1년) 최고가의 '근접 허용폭' 이내일 것 (기본 설정은 하한 0% = 신고가 이상)</li><li><b>장기 추세 확인</b> — 종가가 200일 이동평균 위에 있고, 그 이동평균 자체도 상승 중일 것 (이미 꺾인 종목의 일시 반등을 걸러냅니다)</li><li><b>과열 하드컷</b> — 최근 5거래일 상승률이 40% 이상이면 제외 (급등 직후 고점을 잡는 것을 막습니다)</li></ul><details class="entry-detail"><summary>자세히 — 한계와 주의사항</summary><p>George &amp; Hwang(2004) &lt;The 52-Week High and Momentum Investing&gt;의 앵커링 이론에 근거합니다 — 투자자가 52주 최고가를 심리적 기준가로 삼아 그 근처에서 매수를 주저하는 편향이 풀리며 추가 상승이 이어진다는 것입니다.</p><p><b>의도적으로 '신선도'는 조건에 넣지 않았습니다.</b> 이미 오래 상승 중인 리더주도 계속 포착하는 것이 이 스캐너의 목적입니다(신선도에 집중하는 쪽은 Launch Pad).</p><p><b>⚠️ 이 전략은 11년 검증에서 코스피를 이기지 못했습니다.</b> CAGR 7.19% · MDD −85.6% (코스피 매수후보유 10.77% · −43.9%). reports/vs_kospi.md의 결론은 "쓸 수 있는 우위가 없다"입니다. 그럼에도 발행하는 것은 신호 자체를 참고 자료로 쓰기 위해서지, 성과가 검증돼서가 아닙니다.</p><p>예전 설명에 나오던 +261.22% 같은 수치는 <b>당일 종가 매수</b>를 가정한 값이라 실현 불가능합니다(종가는 장 마감에 확정됩니다). 지금 백테스트는 신호 다음 거래일 시가로 체결합니다.</p></details></div>
   <div class="cards"><article class="card">
   <header class="card-head">
@@ -356,7 +356,7 @@ scanner: newhigh
 </article><article class="card">
   <header class="card-head">
     <h3>Avnet <span class="ticker">(AVT)</span></h3>
-    <span class="capture returning">9일전 포착</span>
+    <span class="capture new">신규</span>
     <span class="market">NASDAQ</span>
   </header>
   <div class="industry">Information Technology</div>
@@ -382,7 +382,7 @@ scanner: newhigh
 </article><article class="card">
   <header class="card-head">
     <h3>크라우드스트라이크 홀딩스 <span class="ticker">(CRWD)</span></h3>
-    <span class="capture returning">9일전 포착</span>
+    <span class="capture new">신규</span>
     <span class="market">NASDAQ</span>
   </header>
   <div class="industry">Information Technology</div>
@@ -460,7 +460,7 @@ scanner: newhigh
 </article><article class="card">
   <header class="card-head">
     <h3>NetApp <span class="ticker">(NTAP)</span></h3>
-    <span class="capture returning">3일전 포착</span>
+    <span class="capture new">신규</span>
     <span class="market">NASDAQ</span>
   </header>
   <div class="industry">Information Technology</div>
@@ -486,7 +486,7 @@ scanner: newhigh
 </article><article class="card">
   <header class="card-head">
     <h3>Semtech <span class="ticker">(SMTC)</span></h3>
-    <span class="capture returning">15일전 포착</span>
+    <span class="capture new">신규</span>
     <span class="market">NASDAQ</span>
   </header>
   <div class="industry">Information Technology</div>
@@ -516,9 +516,9 @@ scanner: newhigh
   </details>
 </section>
   <details class="watchlist-summary">
-  <summary>지금 담긴 관심종목 26종목 <a href="https://jiksooshin-dotcom.github.io/stock-scanner-reports/reports/watchlist/2026-10-02.html" onclick="event.stopPropagation()">다이제스트 열기</a></summary>
+  <summary>지금 담긴 관심종목 28종목 <a href="https://jiksooshin-dotcom.github.io/stock-scanner-reports/reports/watchlist/2026-10-02.html" onclick="event.stopPropagation()">다이제스트 열기</a></summary>
   <div class="table-wrap"><table><thead><tr><th>종목</th><th>티커</th><th>시장</th><th>담은 경로</th><th>담은 날짜</th><th>이유</th></tr></thead>
-  <tbody><tr><td>워너 브로스 디스커버리</td><td>WBD</td><td>NASDAQ</td><td>newhigh</td><td>2026-10-02</td><td>신고가 돌파 + 거래량 확인, 컵위드핸들</td></tr><tr><td>SK케미칼</td><td>285130</td><td>KOSPI</td><td>launchpad</td><td>2026-10-01</td><td>컵위드핸들, 매수 검토 중</td></tr><tr><td>피에스케이</td><td>319660</td><td>KOSDAQ</td><td>launchpad</td><td>2026-10-01</td><td>정배열 막 시작(신선도 높음)</td></tr><tr><td>메타 플랫폼스(페이스북)</td><td>META</td><td>NASDAQ</td><td>launchpad</td><td>2026-09-30</td><td>이중바닥, 진입 시점 대기</td></tr><tr><td>Mettler Toledo</td><td>MTD</td><td>NASDAQ</td><td>launchpad</td><td>2026-09-30</td><td>역헤드앤숄더, 진입 시점 대기</td></tr><tr><td>Bruker</td><td>BRKR</td><td>NASDAQ</td><td>launchpad</td><td>2026-09-26</td><td>컵위드핸들</td></tr><tr><td>써모 피셔 사이언티픽</td><td>TMO</td><td>NYSE</td><td>newhigh</td><td>2026-09-18</td><td>컵위드핸들, 이중바닥, 장기 관찰</td></tr><tr><td>Chord Energy</td><td>CHRD</td><td>NASDAQ</td><td>launchpad</td><td>2026-09-13</td><td>진입 시점 대기</td></tr><tr><td>nVent Electric plc</td><td>NVT</td><td>NASDAQ</td><td>launchpad</td><td>2026-09-10</td><td>거래량 동반 상승</td></tr><tr><td>발레로 에너지</td><td>VLO</td><td>NASDAQ</td><td>newhigh</td><td>2026-09-10</td><td>장기 관찰</td></tr><tr><td>Marathon Petroleum Corporation</td><td>MPC</td><td>NYSE</td><td>manual</td><td>2026-09-10</td><td></td></tr><tr><td>Atlassian Corp</td><td>TEAM</td><td>NASDAQ</td><td>manual</td><td>2026-09-10</td><td></td></tr><tr><td>아스플로</td><td>159010</td><td>KOSDAQ</td><td>manual</td><td>2026-09-10</td><td></td></tr><tr><td>엑시콘</td><td>092870</td><td>KOSDAQ</td><td>manual</td><td>2026-09-10</td><td></td></tr><tr><td>컴투스</td><td>078340</td><td>KOSDAQ</td><td>launchpad</td><td>2026-09-10</td><td>거래량 동반 상승</td></tr><tr><td>로빈훗 마케츠</td><td>HOOD</td><td>NASDAQ</td><td>launchpad</td><td>2026-09-05</td><td></td></tr><tr><td>SK이노베이션</td><td>096770</td><td>KOSPI</td><td>weinstein</td><td>2026-09-04</td><td></td></tr><tr><td>아제닉스(ADR)</td><td>ARGX</td><td>NASDAQ</td><td>newhigh</td><td>2026-09-02</td><td></td></tr><tr><td>디어</td><td>DE</td><td>NYSE</td><td>newhigh</td><td>2026-09-02</td><td></td></tr><tr><td>슈피겐코리아</td><td>192440</td><td>KOSDAQ</td><td>launchpad</td><td>2026-08-31</td><td></td></tr><tr><td>토론토 도미니언 뱅크</td><td>TD</td><td>NYSE</td><td>launchpad</td><td>2026-08-28</td><td></td></tr><tr><td>Quest Diagnostics</td><td>DGX</td><td>NASDAQ</td><td>newhigh</td><td>2026-08-28</td><td></td></tr><tr><td>포티넷</td><td>FTNT</td><td>NASDAQ</td><td>newhigh</td><td>2026-08-28</td><td></td></tr><tr><td>Labcorp</td><td>LH</td><td>NASDAQ</td><td>newhigh</td><td>2026-08-28</td><td></td></tr><tr><td>KB금융</td><td>105560</td><td>KOSPI</td><td>launchpad</td><td>2026-08-27</td><td></td></tr><tr><td>뱅크 오브 노바스코샤</td><td>BNS</td><td>NASDAQ</td><td>newhigh</td><td>2026-08-27</td><td></td></tr></tbody></table></div>
+  <tbody><tr><td>Arrow Electronics</td><td>ARW</td><td>NASDAQ</td><td>newhigh</td><td>2026-10-03</td><td>신고가 돌파 + 거래량 확인</td></tr><tr><td>NetApp</td><td>NTAP</td><td>NASDAQ</td><td>newhigh</td><td>2026-10-03</td><td>신고가 돌파 + 거래량 확인</td></tr><tr><td>워너 브로스 디스커버리</td><td>WBD</td><td>NASDAQ</td><td>newhigh</td><td>2026-10-02</td><td>신고가 돌파 + 거래량 확인, 컵위드핸들</td></tr><tr><td>SK케미칼</td><td>285130</td><td>KOSPI</td><td>launchpad</td><td>2026-10-01</td><td>컵위드핸들, 매수 검토 중</td></tr><tr><td>피에스케이</td><td>319660</td><td>KOSDAQ</td><td>launchpad</td><td>2026-10-01</td><td>정배열 막 시작(신선도 높음)</td></tr><tr><td>메타 플랫폼스(페이스북)</td><td>META</td><td>NASDAQ</td><td>launchpad</td><td>2026-09-30</td><td>이중바닥, 진입 시점 대기</td></tr><tr><td>Mettler Toledo</td><td>MTD</td><td>NASDAQ</td><td>launchpad</td><td>2026-09-30</td><td>역헤드앤숄더, 진입 시점 대기</td></tr><tr><td>Bruker</td><td>BRKR</td><td>NASDAQ</td><td>launchpad</td><td>2026-09-26</td><td>컵위드핸들</td></tr><tr><td>써모 피셔 사이언티픽</td><td>TMO</td><td>NYSE</td><td>newhigh</td><td>2026-09-18</td><td>컵위드핸들, 이중바닥, 장기 관찰</td></tr><tr><td>Chord Energy</td><td>CHRD</td><td>NASDAQ</td><td>launchpad</td><td>2026-09-13</td><td>진입 시점 대기</td></tr><tr><td>nVent Electric plc</td><td>NVT</td><td>NASDAQ</td><td>launchpad</td><td>2026-09-10</td><td>거래량 동반 상승</td></tr><tr><td>발레로 에너지</td><td>VLO</td><td>NASDAQ</td><td>newhigh</td><td>2026-09-10</td><td>장기 관찰</td></tr><tr><td>Marathon Petroleum Corporation</td><td>MPC</td><td>NYSE</td><td>manual</td><td>2026-09-10</td><td></td></tr><tr><td>Atlassian Corp</td><td>TEAM</td><td>NASDAQ</td><td>manual</td><td>2026-09-10</td><td></td></tr><tr><td>아스플로</td><td>159010</td><td>KOSDAQ</td><td>manual</td><td>2026-09-10</td><td></td></tr><tr><td>엑시콘</td><td>092870</td><td>KOSDAQ</td><td>manual</td><td>2026-09-10</td><td></td></tr><tr><td>컴투스</td><td>078340</td><td>KOSDAQ</td><td>launchpad</td><td>2026-09-10</td><td>거래량 동반 상승</td></tr><tr><td>로빈훗 마케츠</td><td>HOOD</td><td>NASDAQ</td><td>launchpad</td><td>2026-09-05</td><td></td></tr><tr><td>SK이노베이션</td><td>096770</td><td>KOSPI</td><td>weinstein</td><td>2026-09-04</td><td></td></tr><tr><td>아제닉스(ADR)</td><td>ARGX</td><td>NASDAQ</td><td>newhigh</td><td>2026-09-02</td><td></td></tr><tr><td>디어</td><td>DE</td><td>NYSE</td><td>newhigh</td><td>2026-09-02</td><td></td></tr><tr><td>슈피겐코리아</td><td>192440</td><td>KOSDAQ</td><td>launchpad</td><td>2026-08-31</td><td></td></tr><tr><td>토론토 도미니언 뱅크</td><td>TD</td><td>NYSE</td><td>launchpad</td><td>2026-08-28</td><td></td></tr><tr><td>Quest Diagnostics</td><td>DGX</td><td>NASDAQ</td><td>newhigh</td><td>2026-08-28</td><td></td></tr><tr><td>포티넷</td><td>FTNT</td><td>NASDAQ</td><td>newhigh</td><td>2026-08-28</td><td></td></tr><tr><td>Labcorp</td><td>LH</td><td>NASDAQ</td><td>newhigh</td><td>2026-08-28</td><td></td></tr><tr><td>KB금융</td><td>105560</td><td>KOSPI</td><td>launchpad</td><td>2026-08-27</td><td></td></tr><tr><td>뱅크 오브 노바스코샤</td><td>BNS</td><td>NASDAQ</td><td>newhigh</td><td>2026-08-27</td><td></td></tr></tbody></table></div>
 </details>
   
   
